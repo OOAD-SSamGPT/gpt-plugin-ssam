@@ -1,20 +1,9 @@
-import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel
+from PyQt6.QtCore import QUrl
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWebEngineWidgets import QWebEngineView
 
-
-class MainWindow(QWidget):
-    def __init__(self):
-        super().__init__()
-
-        self.setWindowTitle("PyQt6 Example")
-        self.setGeometry(100, 100, 300, 100)
-
-        label = QLabel("Hello, PyQt6!", self)
-        label.move(100, 40)
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
+app = QApplication([])
+view = QWebEngineView()
+view.load(QUrl.fromLocalFile('./HW_2/20191579_객체지향분석및설계_HW2.pdf'))
+view.show()
+app.exec()
