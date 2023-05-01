@@ -25,8 +25,9 @@ class MainWindow(QMainWindow):
 
         self.pageview_widget = PageviewWidget()
         self.preview_widget = PreviewWidget()
+        self.preview_widget.idxChanged.connect(self.idx_changed)
         self.idx_widget = IdxWidget()
-        self.idx_widget.signal.idxChangedEvent.connect(self.idx_changed)
+        self.idx_widget.idxChanged.connect(self.idx_changed)
 
         self.init_menu_bar()
         self.init_tool_bar()
@@ -66,25 +67,23 @@ class MainWindow(QMainWindow):
         self.idx = 0
         self.idx_widget.set_idx(self.idx)
         self.idx_widget.set_max_idx(self.max_idx)
-        self.preview_widget.draw_preview(self.pdf)
+        self.preview_widget.set_pdf(self.pdf)
         self.pageview_widget.set_page(self.pdf[0])
 
     # main events
     def keyPressEvent(self, event):
         if self.pdf:
             if event.key() == Qt.Key_Right and self.idx < self.max_idx:
-                self.idx += 1
-                self.idx_widget.set_idx(self.idx)
-                self.pageview_widget.set_page(self.pdf[self.idx])
+                self.idx_changed(self.idx + 1)
             elif event.key() == Qt.Key_Left and self.idx > 0:
-                self.idx -= 1
-                self.idx_widget.set_idx(self.idx)
-                self.pageview_widget.set_page(self.pdf[self.idx])
+                self.idx_changed(self.idx - 1)
     
     def idx_changed(self, idx):
-        if self.pdf:
+        if self.pdf and self.idx != idx:
             self.idx = idx
-            self.pageview_widget.set_page(self.pdf[self.idx])
+            self.pageview_widget.set_page(self.pdf[idx])
+            self.preview_widget.set_idx(idx)
+            self.idx_widget.set_idx(idx)
 
 
 if __name__ == '__main__':

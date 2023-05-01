@@ -1,13 +1,16 @@
 import fitz
-import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
+
 class PageviewWidget(QLabel):
+    
     def __init__(self):
         super().__init__()
         self.page = None
+        self.setMinimumSize(1, 1)
+        self.setAlignment(Qt.AlignCenter)
     
     def set_page(self, page):
         self.page = page

@@ -1,17 +1,15 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import Qt, pyqtSignal, QObject
+from PyQt5.QtCore import Qt, pyqtSignal
 
-
-class CustomSignal(QObject):
-    idxChangedEvent = pyqtSignal(int)
 
 class IdxWidget(QWidget):
+    idxChanged = pyqtSignal(int)
+
     def __init__(self):
         super().__init__()
         self.max_idx = 0
         self.idx = 0
-        self.signal = CustomSignal()
 
         self.idx_box = QLineEdit('1', self)
         self.idx_box.setFixedWidth(60)
@@ -53,29 +51,21 @@ class IdxWidget(QWidget):
     
     def previous_button_clicked(self):
         if self.idx > 0:
-            self.idx -= 1
-            self.idx_box.setText(str(self.idx + 1))
-            self.signal.idxChangedEvent.emit(self.idx)
+            self.idxChanged.emit(self.idx - 1)
     
     def next_button_clicked(self):
         if self.idx < self.max_idx:
-            self.idx += 1
-            self.idx_box.setText(str(self.idx + 1))
-            self.signal.idxChangedEvent.emit(self.idx)
+            self.idxChanged.emit(self.idx + 1)
     
     def idx_editing_finished(self):
         try:
-            goal = int(self.idx_box.text()) - 1
-            if goal < 0:
-                self.idx_box.setText('1')
-                self.idx = 0
-            elif self.max_idx < goal:
-                self.idx_box.setText(str(self.max_idx + 1))
-                self.idx = self.max_idx
+            idx = int(self.idx_box.text()) - 1
+            if idx < 0:
+                self.idxChanged.emit(0)
+            elif self.max_idx < idx:
+                self.idxChanged.emit(self.max_idx)
             else:
-                self.idx = goal
-                self.idx_box.setText(str(self.idx + 1))
-                self.signal.idxChangedEvent.emit(self.idx)
+                self.idxChanged.emit(idx)
         except:
             self.idx_box.setText(str(self.idx + 1))
         self.idx_box.clearFocus()
