@@ -6,6 +6,7 @@ import fitz
 from pageview_widget import PageviewWidget
 from preview_widget import PreviewWidget
 from idx_widget import IdxWidget
+from scale_widget import ScaleWidget
 
 
 class MainWindow(QMainWindow):
@@ -28,6 +29,8 @@ class MainWindow(QMainWindow):
         self.preview_widget.idxChanged.connect(self.idx_changed)
         self.idx_widget = IdxWidget()
         self.idx_widget.idxChanged.connect(self.idx_changed)
+        self.scale_widget = ScaleWidget()
+        self.scale_widget.scaleChanged.connect(self.scale_changed)
 
         self.init_menu_bar()
         self.init_tool_bar()
@@ -53,8 +56,12 @@ class MainWindow(QMainWindow):
         idx_action = QWidgetAction(self)
         idx_action.setDefaultWidget(self.idx_widget)
 
+        scale_action = QWidgetAction(self)
+        scale_action.setDefaultWidget(self.scale_widget)
+
         tool_bar = QToolBar(self)
         tool_bar.addAction(idx_action)
+        tool_bar.addAction(scale_action)
         tool_bar.setMovable(False)
         tool_bar.setFloatable(False)
         self.addToolBar(tool_bar)
@@ -84,6 +91,12 @@ class MainWindow(QMainWindow):
             self.pageview_widget.set_page(self.pdf[idx])
             self.preview_widget.set_idx(idx)
             self.idx_widget.set_idx(idx)
+    
+    def scale_changed(self, scale):
+        if self.pdf and self.scale != scale:
+            self.scale = round(scale, 4)
+            self.pageview_widget.set_scale(self.scale)
+            self.scale_widget.set_scale(self.scale)
 
 
 if __name__ == '__main__':
