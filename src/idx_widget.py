@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt, pyqtSignal
 
-
+#위젯
 class IdxWidget(QWidget):
     idxChanged = pyqtSignal(int)
 
