@@ -60,12 +60,13 @@ class IdxWidget(QWidget):
     def idx_editing_finished(self):
         try:
             idx = int(self.idx_box.text()) - 1
-            if idx < 0:
-                self.idxChanged.emit(0)
-            elif self.max_idx < idx:
-                self.idxChanged.emit(self.max_idx)
-            else:
-                self.idxChanged.emit(idx)
+            if self.idx != idx:
+                if idx < 0:
+                    self.idxChanged.emit(0)
+                elif self.max_idx < idx:
+                    self.idxChanged.emit(self.max_idx)
+                else:
+                    self.idxChanged.emit(idx)
         except:
             self.idx_box.setText(str(self.idx + 1))
         self.idx_box.clearFocus()
