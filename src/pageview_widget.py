@@ -15,7 +15,7 @@ class PageviewWidget(QScrollArea):
         self.setAlignment(Qt.AlignCenter)
         self.setWidgetResizable(True)
         self.setFocusPolicy(Qt.NoFocus)
-
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 
         self.label = QLabel(self)
         self.label.setAlignment(Qt.AlignCenter)
@@ -38,11 +38,11 @@ class PageviewWidget(QScrollArea):
         if self.scale_policy == '사용자 설정':
             pass
         elif self.scale_policy == '페이지 맞춤':
-            x_scale = (self.width() - 2 * self.frameWidth()) / self.page.rect.width
+            x_scale = (self.width() - 2 * self.frameWidth() - self.verticalScrollBar().width()) / self.page.rect.width
             y_scale = (self.height() - 2 * self.frameWidth()) / self.page.rect.height
             self.scale = min(x_scale, y_scale)
         elif self.scale_policy == '너비 맞춤':
-            self.scale = (self.width() - 2 * self.frameWidth()) / self.page.rect.width
+            self.scale = (self.width() - 2 * self.frameWidth() - self.verticalScrollBar().width()) / self.page.rect.width
         
         pix = self.page.get_pixmap(matrix=fitz.Matrix(self.scale, self.scale))
         qimage = QImage(pix.samples_ptr, pix.width, pix.height, pix.stride, QImage.Format_RGB888)
