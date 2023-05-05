@@ -14,6 +14,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.pdf = None
+        self.idx = 0
+        self.max_idx = 0
         self.init_ui()
         self.show()
     
@@ -85,6 +87,7 @@ class MainWindow(QMainWindow):
     
     def idx_changed(self, idx):
         if self.pdf:
+            self.idx = idx
             self.pageview_widget.set_page(self.pdf[idx])
             self.preview_widget.set_idx(idx)
             self.idx_widget.set_idx(idx)
