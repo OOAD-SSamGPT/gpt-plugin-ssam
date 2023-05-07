@@ -16,7 +16,6 @@ class MainWindow(QMainWindow):
         self.pdf = None
         self.idx = 0
         self.max_idx = 0
-        self.scale = 1
         self.init_ui()
         self.show()
     
@@ -25,6 +24,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('PDF Viewer')
 
         self.pageview_widget = PageviewWidget()
+        self.pageview_widget.resized.connect(self.page_resized)
         self.preview_widget = PreviewWidget()
         self.preview_widget.idxChanged.connect(self.idx_changed)
         self.idx_widget = IdxWidget()
@@ -70,8 +70,8 @@ class MainWindow(QMainWindow):
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self.window(), 'Open file', '', 'PDF Files (*.pdf)')
         self.pdf = fitz.open(file_path)
-        self.max_idx = len(self.pdf) - 1
         self.idx = 0
+        self.max_idx = len(self.pdf) - 1
         self.idx_widget.set_idx(self.idx)
         self.idx_widget.set_max_idx(self.max_idx)
         self.preview_widget.set_pdf(self.pdf)
@@ -86,17 +86,18 @@ class MainWindow(QMainWindow):
                 self.idx_changed(self.idx - 1)
     
     def idx_changed(self, idx):
-        if self.pdf and self.idx != idx:
+        if self.pdf:
             self.idx = idx
             self.pageview_widget.set_page(self.pdf[idx])
             self.preview_widget.set_idx(idx)
             self.idx_widget.set_idx(idx)
     
-    def scale_changed(self, scale):
-        if self.pdf and self.scale != scale:
-            self.scale = round(scale, 4)
-            self.pageview_widget.set_scale(self.scale)
-            self.scale_widget.set_scale(self.scale)
+    def scale_changed(self, scale, scale_policy):
+        scale = self.pageview_widget.set_scale(scale, scale_policy)
+        self.scale_widget.set_scale(scale)
+    
+    def page_resized(self, scale):
+        self.scale_widget.set_scale(scale)
 
 
 if __name__ == '__main__':
