@@ -7,6 +7,7 @@ from pageview_widget import PageviewWidget
 from preview_widget import PreviewWidget
 from idx_widget import IdxWidget
 from scale_widget import ScaleWidget
+from note_widget import NoteWidget
 
 
 class MainWindow(QMainWindow):
@@ -25,6 +26,7 @@ class MainWindow(QMainWindow):
 
         self.pageview_widget = PageviewWidget()
         self.pageview_widget.resized.connect(self.page_resized)
+        self.note_widget = NoteWidget()
         self.preview_widget = PreviewWidget()
         self.preview_widget.idxChanged.connect(self.idx_changed)
         self.idx_widget = IdxWidget()
@@ -35,12 +37,19 @@ class MainWindow(QMainWindow):
         self.init_menu_bar()
         self.init_tool_bar()
 
-        splitter = QSplitter()
-        splitter.addWidget(self.preview_widget)
-        splitter.addWidget(self.pageview_widget)
+        self.sub_splitter = QSplitter()
+        self.sub_splitter.setOrientation(Qt.Orientation.Vertical)
+        self.sub_splitter.addWidget(self.pageview_widget)
+        self.sub_splitter.addWidget(self.note_widget)
+        self.sub_splitter.setSizes([1000, 100])
+
+        self.main_splitter = QSplitter()
+        self.main_splitter.addWidget(self.preview_widget)
+        self.main_splitter.addWidget(self.sub_splitter)
+        self.main_splitter.setSizes([100, 1000])
         
         layout = QHBoxLayout()
-        layout.addWidget(splitter)
+        layout.addWidget(self.main_splitter)
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
