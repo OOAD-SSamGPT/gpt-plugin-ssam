@@ -85,6 +85,7 @@ class MainWindow(QMainWindow):
         self.idx_widget.set_max_idx(self.max_idx)
         self.preview_widget.set_pdf(self.pdf)
         self.pageview_widget.set_page(self.pdf[0])
+        self.note_widget.load_notes(self.pdf)
 
     # main events
     def keyPressEvent(self, event):
@@ -100,6 +101,7 @@ class MainWindow(QMainWindow):
             self.pageview_widget.set_page(self.pdf[idx])
             self.preview_widget.set_idx(idx)
             self.idx_widget.set_idx(idx)
+            self.note_widget.set_idx(idx)
     
     def scale_changed(self, scale, scale_policy):
         scale = self.pageview_widget.set_scale(scale, scale_policy)
