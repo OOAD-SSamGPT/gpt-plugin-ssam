@@ -1,4 +1,5 @@
 import sys
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 import fitz
@@ -95,6 +96,10 @@ class MainWindow(QMainWindow):
             elif event.key() == Qt.Key_Left and self.idx > 0:
                 self.idx_changed(self.idx - 1)
     
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton and self.sender() != self.note_widget:
+            self.note_widget.update_note()
+
     def idx_changed(self, idx):
         if self.pdf:
             self.idx = idx
