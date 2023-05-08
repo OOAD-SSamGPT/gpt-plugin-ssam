@@ -17,6 +17,10 @@ class NoteWidget(QTextEdit):
         self.setText(self.notes[idx])
     
     def load_notes(self, pdf):
+        self.pages.clear()
+        self.annots.clear()
+        self.notes.clear()
+
         for page in pdf:
             self.pages.append(page)
             for annot in page.annots():
