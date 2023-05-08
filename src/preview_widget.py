@@ -16,7 +16,7 @@ class PreviewItem(QWidget):
         layout = QVBoxLayout()
         layout.setSpacing(0)
 
-        pix = page.get_pixmap(matrix=fitz.Matrix(0.15, 0.15))
+        pix = page.get_pixmap(matrix=fitz.Matrix(0.15, 0.15), annots=False)
         qimage = QImage(pix.samples_ptr, pix.width, pix.height, pix.stride, QImage.Format_RGB888)
         pixmap = QPixmap.fromImage(qimage)
 

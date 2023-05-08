@@ -1,5 +1,4 @@
 import sys
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 import fitz
@@ -56,11 +55,16 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
     
     def init_menu_bar(self):
-        file_menu = QMenu('File', self)
-        self.menuBar().addMenu(file_menu)
         open_action = QAction('Open', self)
         open_action.triggered.connect(self.open_file)
+        save_action = QAction('Save', self)
+        save_action.triggered.connect(self.save_file)
+
+        file_menu = QMenu('File', self)
         file_menu.addAction(open_action)
+        file_menu.addAction(save_action)
+
+        self.menuBar().addMenu(file_menu)
     
     def init_tool_bar(self):
         idx_action = QWidgetAction(self)
@@ -81,12 +85,17 @@ class MainWindow(QMainWindow):
         file_path, _ = QFileDialog.getOpenFileName(self.window(), 'Open file', '', 'PDF Files (*.pdf)')
         self.pdf = fitz.open(file_path)
         self.idx = 0
-        self.max_idx = len(self.pdf) - 1
+        self.max_idx = self.pdf.page_count - 1
         self.idx_widget.set_idx(self.idx)
         self.idx_widget.set_max_idx(self.max_idx)
         self.preview_widget.set_pdf(self.pdf)
         self.pageview_widget.set_page(self.pdf[0])
         self.note_widget.load_notes(self.pdf)
+    
+    def save_file(self):
+        if self.pdf:
+            self.note_widget.save_note()
+            self.pdf.save(self.pdf.name, incremental=True, encryption=fitz.PDF_ENCRYPT_KEEP)
 
     # main events
     def keyPressEvent(self, event):
@@ -97,7 +106,7 @@ class MainWindow(QMainWindow):
                 self.idx_changed(self.idx - 1)
     
     def mousePressEvent(self, event):
-        if event.button() == Qt.LeftButton and self.sender() != self.note_widget:
+        if self.pdf and event.button() == Qt.LeftButton and self.sender() != self.note_widget:
             self.note_widget.update_note()
 
     def idx_changed(self, idx):
