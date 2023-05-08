@@ -8,6 +8,7 @@ class NoteWidget(QTextEdit):
         super().__init__()
         self.setFocusPolicy(Qt.ClickFocus)
         self.notes = []
+        self.idx = 0
     
     def load_notes(self, pdf):
         for page in pdf:
@@ -20,4 +21,9 @@ class NoteWidget(QTextEdit):
         self.set_idx(0)
     
     def set_idx(self, idx):
+        self.idx = idx
         self.setText(self.notes[idx])
+    
+    def update_note(self):
+        self.notes[self.idx] = self.toPlainText()
+        self.clearFocus()
