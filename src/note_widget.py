@@ -38,6 +38,7 @@ class NoteWidget(QTextEdit):
         self.clearFocus()
 
     def save_note(self):
+        self.update_note()
         for i, page in enumerate(self.pages):
             if self.notes[i] != '':
                 if self.annots[i]:
