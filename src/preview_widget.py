@@ -14,21 +14,23 @@ class PreviewItem(QWidget):
         self.setAttribute(Qt.WA_StyledBackground, True)
 
         layout = QVBoxLayout()
+
         layout.setSpacing(0)
 
         pix = page.get_pixmap(matrix=fitz.Matrix(0.15, 0.15), annots=False)
-        qimage = QImage(pix.samples_ptr, pix.width, pix.height, pix.stride, QImage.Format_RGB888)
+        qimage = QImage(pix.samples_ptr, pix.width, pix.height,
+                        pix.stride, QImage.Format_RGB888)
         pixmap = QPixmap.fromImage(qimage)
 
         image_label = QLabel()
         image_label.setPixmap(pixmap)
         idx_label = QLabel(str(idx + 1))
         idx_label.setAlignment(Qt.AlignCenter)
-        
+
         layout.addWidget(image_label)
         layout.addWidget(idx_label)
         self.setLayout(layout)
-    
+
     def mouseReleaseEvent(self, event):
         self.clicked.emit(self.idx)
 
@@ -44,7 +46,7 @@ class PreviewWidget(QScrollArea):
         self.setWidgetResizable(True)
         self.setFocusPolicy(Qt.NoFocus)
         self.horizontalScrollBar().setEnabled(False)
-        
+
     def set_pdf(self, pdf):
         self.idx = 0
         for preview_item in self.preview_items:
@@ -63,9 +65,9 @@ class PreviewWidget(QScrollArea):
             preview_item.clicked.connect(self.preview_item_clicked)
             layout.addWidget(preview_item)
             self.preview_items.append(preview_item)
-        
+
         self.setWidget(widget)
-        self.setFixedWidth(self.sizeHint().width() + 2 * self.frameWidth() + \
+        self.setFixedWidth(self.sizeHint().width() + 2 * self.frameWidth() +
                            self.verticalScrollBar().sizeHint().width())
         self.preview_items[0].setStyleSheet('background-color: orange;')
 
@@ -74,6 +76,6 @@ class PreviewWidget(QScrollArea):
         self.preview_items[idx].setStyleSheet('background-color: orange;')
         self.idx = idx
         self.ensureWidgetVisible(self.preview_items[self.idx], yMargin=0)
-    
+
     def preview_item_clicked(self, idx):
         self.idxChanged.emit(idx)

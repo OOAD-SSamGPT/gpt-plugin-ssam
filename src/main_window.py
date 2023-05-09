@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 import fitz
 
+
 from pageview_widget import PageviewWidget
 from preview_widget import PreviewWidget
 from idx_widget import IdxWidget
@@ -11,7 +12,7 @@ from note_widget import NoteWidget
 
 
 class MainWindow(QMainWindow):
-    
+
     def __init__(self):
         super().__init__()
         self.pdf = None
@@ -19,7 +20,7 @@ class MainWindow(QMainWindow):
         self.max_idx = 0
         self.init_ui()
         self.show()
-    
+
     def init_ui(self):
         self.resize(1000, 800)
         self.setWindowTitle('PDF Viewer')
@@ -47,25 +48,25 @@ class MainWindow(QMainWindow):
         self.main_splitter.addWidget(self.preview_widget)
         self.main_splitter.addWidget(self.sub_splitter)
         self.main_splitter.setSizes([100, 1000])
-        
+
         layout = QHBoxLayout()
         layout.addWidget(self.main_splitter)
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
-    
+
     def init_menu_bar(self):
         open_action = QAction('Open', self)
         open_action.triggered.connect(self.open_file)
         save_action = QAction('Save', self)
         save_action.triggered.connect(self.save_file)
 
-        file_menu = QMenu('File', self)
-        file_menu.addAction(open_action)
-        file_menu.addAction(save_action)
+        menubar = self.menuBar()
+        menubar.setNativeMenuBar(False)
+        filemenu = menubar.addMenu('&File')
+        filemenu.addAction(open_action)
+        filemenu.addAction(save_action)
 
-        self.menuBar().addMenu(file_menu)
-    
     def init_tool_bar(self):
         idx_action = QWidgetAction(self)
         idx_action.setDefaultWidget(self.idx_widget)
@@ -79,10 +80,11 @@ class MainWindow(QMainWindow):
         tool_bar.setMovable(False)
         tool_bar.setFloatable(False)
         self.addToolBar(tool_bar)
-    
+
     # events for menu bar
     def open_file(self):
-        file_path, _ = QFileDialog.getOpenFileName(self.window(), 'Open file', '', 'PDF Files (*.pdf)')
+        file_path, _ = QFileDialog.getOpenFileName(
+            self.window(), 'Open file', '', 'PDF Files (*.pdf)')
         self.pdf = fitz.open(file_path)
         self.idx = 0
         self.max_idx = self.pdf.page_count - 1
@@ -91,11 +93,12 @@ class MainWindow(QMainWindow):
         self.preview_widget.set_pdf(self.pdf)
         self.pageview_widget.set_page(self.pdf[0])
         self.note_widget.load_notes(self.pdf)
-    
+
     def save_file(self):
         if self.pdf:
             self.note_widget.save_note()
-            self.pdf.save(self.pdf.name, incremental=True, encryption=fitz.PDF_ENCRYPT_KEEP)
+            self.pdf.save(self.pdf.name, incremental=True,
+                          encryption=fitz.PDF_ENCRYPT_KEEP)
 
     # main events
     def keyPressEvent(self, event):
@@ -104,7 +107,7 @@ class MainWindow(QMainWindow):
                 self.idx_changed(self.idx + 1)
             elif event.key() == Qt.Key_Left and self.idx > 0:
                 self.idx_changed(self.idx - 1)
-    
+
     def mousePressEvent(self, event):
         if self.pdf and event.button() == Qt.LeftButton and self.sender() != self.note_widget:
             self.note_widget.update_note()
@@ -116,11 +119,11 @@ class MainWindow(QMainWindow):
             self.preview_widget.set_idx(idx)
             self.idx_widget.set_idx(idx)
             self.note_widget.set_idx(idx)
-    
+
     def scale_changed(self, scale, scale_policy):
         scale = self.pageview_widget.set_scale(scale, scale_policy)
         self.scale_widget.set_scale(scale)
-    
+
     def page_resized(self, scale):
         self.scale_widget.set_scale(scale)
 
