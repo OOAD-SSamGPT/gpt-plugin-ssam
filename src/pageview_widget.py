@@ -46,7 +46,6 @@ class PageviewWidget(QScrollArea):
         elif self.scale_policy == '너비 맞춤':
             self.scale = (self.width() - 2 * self.frameWidth() -
                           self.verticalScrollBar().width()) / self.page.rect.width
-
         pix = self.page.get_pixmap(matrix=fitz.Matrix(self.scale, self.scale))
         qimage = QImage(pix.samples_ptr, pix.width, pix.height,
                         pix.stride, QImage.Format_RGB888)

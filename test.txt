@@ -1,0 +1,3813 @@
+DevOps Point of View
+An Enterprise Architecture perspective
+
+Amsterdam, 2022
+
+Management summary
+“It is not the strongest of the species that survive, nor the most intelligent, but the 
+one most responsive to change.”1
+Setting the scene
+
+Goal of this Point of View
+
+In the current world of IT and the development of 
+IT-related products or services, companies from 
+enterprise level to smaller sizes are starting to 
+use the DevOps processes and methods as a part 
+of their day-to-day organization process. 
+The goal is to reduce the time involved in all the 
+software development phases, to achieve greater 
+application stability and faster development 
+cycles. 
+However not only on the technical side of the 
+organization is DevOps changing the playing 
+field, also an organizational change that involves 
+merging development and operations teams is 
+required with a hint of cultural changes. 
+And last, but not least, the skillset of all people 
+involved is changing. 
+
+1 Charles Darwin
+
+© 2022 Deloitte The Netherlands
+
+This point of view aims to create awareness around the 
+transformation towards the DevOps way-of-working, to 
+help gain understanding what DevOps is, why you need it 
+and what is needed to implement DevOps. 
+
+An Enterprise Architecture perspective
+
+Even though it is DevOps from an Enterprise Architecture 
+perspective, this material has been gathered from our 
+experiences with customers, combined with knowledge 
+from subject matter experts and theory from within and 
+outside Deloitte. 
+
+Targeted audience
+
+It is specifically for the people within Deloitte that want to 
+use this as an accelerator for conversations & proposals 
+and to get in contact with the people who have performed 
+these type of projects. 
+By all means, it is a deck that can be shared within 
+Deloitte and with our customers to provide a more holistic 
+view.
+
+Deloitte DevOps Point of View
+
+2
+
+DevOps practitioners
+For questions or remarks, feel free to reach out to our DevOps practitioners
+
+Sebastiaan Teerenstra
+DevOps Process & People 
+
+Senior Consultant
+Technology, Strategy & 
+Transformation
+Deloitte Consulting 
++31 6 22 98 09 09 
+steerenstra@deloitte.nl
+
+Mark Maijs
+DevOps Overall Lead
+
+Director
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 83 89 02 14 
+mmaijs@deloitte.nl
+
+Marlies Quekel
+DevOps Organization & 
+Team Setup
+
+Consultant
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 50 07 02 16 
+mquekel@deloitte.nl
+
+Donald Pondman
+DevOps Transformation
+
+Manager
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 83 33 02 56
+dpondman@deloitte.nl
+
+Lianne Veenhuis
+Test Management
+
+Business Analyst 
+Technology, Strategy & 
+Transformation
+Deloitte Consulting 
++31 6 156 904 09 
+lveenhuis@deloitte.nl
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+3
+
+Contents
+
+What is DevOps?
+
+Why do I need DevOps?
+
+Where is DevOps applicable?
+
+What is needed for DevOps to work?
+• People
+• Process
+• Technology
+• Operating Model
+
+How do I implement DevOps?
+
+Deloitte Accelerators
+
+Client Examples
+
+5
+
+9
+
+12
+
+14
+16
+24
+27
+33
+
+38
+
+42
+
+46
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+4
+4
+
+What is DevOps?
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+5
+
+What is DevOps?
+DevOps is a new way-of-working that improves value delivery for the customer and 
+enables benefits for both development and operations
+
+Definition
+
+DevOps is a new approach to optimize and 
+manage end-to-end service delivery and 
+operations. It applies a set of principles to 
+transform the entire software delivery lifecycle 
+to introduce new practices enabled by 
+technology
+
+DevOps principles
+
+• Culture of shared responsibility 
+
+and collaboration
+
+• End-to-end ownership of services
+• Multi-disciplinary teams
+• Incremental value delivery
+• Flow optimization in the delivery 
+
+process
+
+• Automate (almost) everything
+• Measurement of everything
+• Continuous improvement
+
+Goal
+
+DevOps primary goal is to improve the flow 
+from an idea towards value for the customer, 
+enabled by an environment in which 
+multidisciplinary teams work collaboratively to 
+continuously deliver high quality solutions, in a 
+faster pace, that qualify for operations
+
+New DevOps practices: 
+•
+Continuous Integration
+•
+Continuous Testing
+•
+Continuous Delivery
+•
+Continuous Operations
+
+Applying DevOps principles 
+
+to the SDLC lead to new 
+practices that benefit both 
+Development and Operations
+
+Benefits
+
+• Increases the frequency and 
+quality of deployments and 
+releases
+
+• Improves innovation and risk-
+
+taking
+
+• Realizes faster time to market 
+• Improves solution quality and 
+
+operational reliability
+
+• Improves the Mean Time to 
+
+Recover (MTTR)
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+6
+
+The History of DevOps
+DevOps is becoming the norm in software delivery and is increasingly being adopted & 
+matured across enterprises, becoming the new best practice
+
+2008
+
+2010
+
+2015
+
+2018
+
+The chronic conflict 
+between Dev & Ops is 
+explored
+Based on personal experience 
+living in the world of Dev and 
+Ops, Patrick Debois from 
+Belgium starts investigating 
+the chronic conflict between 
+Dev and Ops. 
+
+The grass roots movement 
+takes off
+DevOps expands upon the 
+practices of “infrastructure as 
+code” and continuous integration 
+and deployment. DevOps principles 
+start being applied to the IT value 
+stream. 
+
+DevOps 
+incorporated into 
+SAFe
+SAFe is rapidly gaining 
+traction in the enterprise 
+arena, where DevOps is 
+adopted and scaled 
+across.
+
+State of DevOps 
+report defines 5-
+stage approach
+From level 0 to 5, a 
+descriptive, pragmatic 
+approach is introduced 
+to guide teams and 
+mature DevOps 
+initiatives, a report 
+sponsored by Deloitte
+
+2009
+
+2011
+
+2016
+
+2019
+
+Pre-
+2008
+
+Pre-DevOps
+In IT, traditional 
+waterfall methods of 
+application 
+development were 
+losing ground to 
+iterative methods such 
+as agile. Speed
+became the goal, 
+which took priority 
+over development and 
+deployment processes.
+
+The “DevOps” term is 
+coined
+Andrew Shafer and Patrick 
+Debois meet at the 
+DevOpsDays 2009 and later 
+at Velocity conference, the 
+term is picked up: 
+“10+ Deploys a Day – a 
+collaboration between Dev 
+& Ops at Flickr” – Velocity, 
+2009.
+
+“DevOps is the 
+future”
+March 2011, Gartner 
+predicts “By 2015 
+DevOps will be adopted 
+by 20% of the Fortune 
+2000.”
+Most CIOs and IT 
+organizations are looking 
+into doing work 
+differently.
+
+DevOps is the 
+new norm for 
+high-performing 
+companies
+“Clearly, what was 
+state of-the-art three 
+years ago is just not 
+good enough for 
+today’s business 
+environment.”
+
+p.18, 2016 State of 
+DevOps Report
+
+Enterprises embed 
+more IT functions 
+in their teams next 
+to ‘Dev’ and ‘Ops’ 
+“organizations are 
+embedding security 
+(DevSecOps), privacy, 
+policy, data (DataOps) 
+and controls into their 
+DevOps culture and 
+processes.”
+
+Deloitte Tech Trends 
+2019
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+7
+
+DevOps practices
+DevOps practices apply continuous automation cycles throughout software 
+development and operations processes
+
+Continuous Integration
+
+the streamlining of internal 
+development by integrating 
+code into a shared 
+repository several times a 
+day. Each check in is then 
+verified by an automated 
+build, allowing teams to 
+detect problems early in 
+the cycle
+
+Continuous Testing
+
+automating and integrating 
+tests into the software 
+delivery chain, and 
+automatically executing 
+those tests against each 
+build of the code base
+
+Continuous Delivery
+
+is the process of delivering 
+code that is production 
+ready and is kept in an
+always releasable state, so 
+it can be deployed 
+(automatically) to 
+production at any given 
+time based on business
+needs
+
+Continuous Operations
+
+is proactively managing the 
+solution based on feedback 
+loops. Monitoring and 
+telemetry become part of 
+the backlog. Processes 
+such as patching also fall 
+under this practice
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+8
+
+Why do I need DevOps?
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+9
+
+Traditional function separation for Development and Operations
+Prior to DevOps change release frequency was low, Development and Operations 
+worked separately to serve business demands, having completely opposite mindsets
+
+Business
+
+Request 
+features
+
+Development
+Changes Features
+
+Demand 
+Stability
+
+Operations
+
+Safeguards Stability
+
+1. Focusses solely on development activities
+
+1. Focusses solely on operational activities
+
+2. Operational requirements are unclear between 
+
+environments making the hand-over cumbersome
+
+3. Operational feedback is only retrieved after 
+
+completing a release
+
+4. After releasing, developers are no longer 
+
+involved
+
+2. Operational requirements are unclear, needing 
+ad-hoc changes to the environment
+
+3. Operational understanding and experience is 
+gained only when the app is released
+
+4. Operators manage and control software 
+written by others
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+10
+
+DevOps unifies the mindset of Development and Operations
+Today business wants to release on demand. With DevOps, both functions continuously 
+collaborate to align business demands within the software delivery lifecycle
+
+Business
+
+Request 
+features
+
+Demand 
+Stability
+
+Development
+Changes Features
+
+Operations
+
+Safeguards Stability
+
+The DevOps culture emphasizes 
+
+a common goal over the 
+whole value delivery chain
+
+End-to-end management and 
+
+traceability of software 
+
+delivery during development 
+
+and issue solving
+
+All members understand
+
+change, are responsible and 
+accountable as a whole, and 
+
+trust each other to deliver
+
+IT governance (e.g. security) 
+
+is embedded within the 
+
+software development best 
+
+practices
+
+The DevOps technology 
+
+embraces CI/CD to automate 
+
+the delivery funnel
+
+DevOps
+
+Integrated software testing 
+
+approach to validate code 
+quality earlier in the process
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+11
+
+Where is DevOps applicable?
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+12
+
+Indicators for DevOps Applicability
+Several indicators help to determine if DevOps is applicable for your organization
+
+DevOps is 
+Applicable
+
+Management trusts delivery teams to work 
+
+autonomously and only shares a product vision
+
+Multiple teams are responsible to manage the end-
+
+to-end lifecycle of a single product
+
+Environments where IT solutions are changing 
+
+rapidly
+
+An incremental delivery process that focuses on 
+
+early value delivery
+
+Desired product end-state is unknown, changing 
+business requirements give guidance on steering 
+
+development
+
+People have great affinity with software and 
+
+technology and are not change averse
+
+Product is software that could be delivered as-a-
+
+service 
+
+DevOps is 
+
+Not Applicable
+
+Management requires direct involvement in the 
+
+delivery process and makes all decisions
+
+Product or service delivery does not require a multi 
+
+disciplinary (cross-functional) team
+
+Environments where IT solutions have low change 
+
+rate
+
+Your delivery process has many sequential 
+
+constraints, where outputs equal required inputs for 
+
+consecutive process steps
+
+Desired product end-state is known and business 
+
+requirements do not often change
+
+People have no affinity for new technologies, and 
+
+are change averse
+
+Products are tangible, typically consisting of semi-
+finished products provisioned by multiple partners 
+that don’t have a direct relation with each other
+
+Leadership style
+
+Team composition
+
+Change rate
+
+Delivery process
+
+Business uncertainty
+
+Change willingness
+
+Product type
+
+Indicator
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+13
+
+What is needed for DevOps to work?
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+14
+
+DevOps dimensions
+The DevOps operating model is structured along People, Process and Technology, each 
+dimension is necessary for successful DevOps
+
+Process
+Establish standardized interconnected process in 
+the software development (and operation) 
+lifecycle
+• Continuous Everything: integration, delivery, 
+testing, monitoring, release management and 
+planning
+
+• Continuous Integration and Continuous 
+
+Delivery are key to build quality into DevOps 
+processes
+
+• Establish interconnected processes across all 
+
+phases of development and operations for 
+consistent and predictable deployments
+
+Technology
+Improve toolset to support the delivery and 
+automation of the process specifically to 
+accelerate software delivery activities
+• Container based delivery and immutable 
+
+•
+
+infrastructure blocks
+Leverage the vast DevOps tooling landscape to 
+automate and support Continuous Integration 
+and Continuous Delivery and minimize user 
+intervention
+
+• Support of dynamic environment configuration 
+
+to help remediate the current bottleneck in 
+testing environment availability
+
+Process
+
+T
+
+e
+
+c
+
+h
+
+n
+
+olo
+
+g
+
+y
+
+Operating 
+
+Model
+
+People
+
+People
+Establish a DevOps Organization & Culture with cross-functional teams that are 
+open and trustful
+• T-shaped employees
+•
+
+Foster continuous learning and development to build cross functional capabilities 
+and a mindset open to continuous change
+
+• Transformational leadership & balanced metrics to drive DevOps culture
+• Open and transparent communication enable feedback and short learning cycles
+
+Operating Model
+• People, Process and Technology 
+
+combined in a governance model for 
+the DevOps way-of-working
+
+• Teams deliver services end-to-end in 
+the DevOps Target Operating Model 
+
+Deloitte DevOps Point of View
+
+15
+
+© 2022 Deloitte The Netherlands
+
+People
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+16
+
+DevOps Organization & Culture
+The principles of the DevOps way-of-working have extensive implications on the 
+organization structure, as well as on the culture of the workforce
+
+DevOps principle
+
+Implication for Organization & Culture
+
+Culture of shared 
+
+responsibility and collaboration
+
+Teams are accountable for progress and output, not an individual team member. Team setup is persistent and co-
+located to improve collaboration and performance.
+
+End-to-end ownership of 
+
+services
+
+Team resources are allocated by services instead of organizational functions. Teams take end-to-end accountability 
+and responsibility (vertically integrated) for the delivery of a service. 
+
+Multi-disciplinary 
+autonomous teams
+
+Teams are setup vertically, end-to-end responsible for the whole lifecycle of a product. It contains balanced T-
+shaped skilled personnel from various domains (cross-functional) to achieve its targets.
+
+Incremental value delivery
+
+Work is broken down into small pieces to continuously deliver value to the business using iterative and frequent 
+releases.
+
+Flow optimization in the 
+
+delivery process
+
+Elimination of waste, shift left and limit work in progress optimizes the flow in the delivery process. Teams test as 
+early and as often as possible, minimize handoffs and maximize checkpoints to reduce dependencies and risks. 
+
+Automate (almost) everything
+
+Tools automate as many tasks and process steps as possible in the delivery process to drastically reduce time, 
+effort, and risk of human errors.
+
+Measurement of everything
+
+Everything is monitored and measured by a balanced metric system focused on the speed and stability of service 
+delivery.
+
+Continuous improvement
+
+Teams organize retrospectives, (automated) feedback loops, and touchpoints with the business in order to 
+continuously improve their delivery and way-of-working.
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+17
+
+DevOps principles are the starting point for an organization structure
+Based on DevOps principles, an organization allocates resources by service instead of 
+functions to enable end-to-end ownership and increase agility within teams
+
+DevOps principles 
+
+Culture of shared 
+
+responsibility and collaboration
+
+End-to-end ownership of services
+
+Multi-disciplinary 
+autonomous teams
+
+Incremental value delivery
+
+Flow optimization in the delivery 
+
+process
+
+Automate (almost) everything
+
+Measurement of everything
+
+Continuous improvement
+
+Product/Service multi-
+disciplinary team(s) are aligned to 
+a particular service
+
+Service Owner is leading delivery 
+and manages the development 
+and operations of the service
+
+Cross Functional DevOps team 
+is a long-standing, fully-allocated, 
+cross functional team that is end-
+to-end responsible for (a module 
+of) the delivered product
+
+Common Core services are 
+shared services provided, 
+preferably through self-service 
+portals, by teams of the 
+technology organization to be 
+used by the different DevOps 
+teams
+
+Service A
+
+Service B
+
+SO TL
+
+SO TL
+
+DevOps 
+team 1
+
+DevOps 
+team 1
+
+DevOps 
+team 2
+
+DevOps 
+team 2
+
+DevOps 
+team 3
+
+Solutions 
+Architect
+
+Solutions 
+Architect
+
+Common Core services
+
+Shared functions 
+
+(e.g. Service Desk, CI/CD)
+
+Infrastructure functions
+
+Functional
+CoPs
+
+Functional
+CoPs
+
+Functional
+CoPs
+
+Tech Lead is a product team 
+member with extensive technical 
+development experience who can 
+lead the Product Team in the 
+execution of its work
+
+Functional Communities of 
+Practices are the knowledge 
+sharing and communication glue 
+that keeps functional expertise 
+(e.g. QA, development, testing 
+etc.) together
+
+Solution Architect is a product 
+team member who governs 
+architecture, design and 
+implementation while enforcing 
+architecture standards and 
+guidelines
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+18
+
+Key DevOps roles and responsibilities
+Several key roles should be represented in a cross functional DevOps team; a team 
+member with a T-shaped profile can fulfill more than one role
+The Product Owner leads the 
+DevOps team and directs 
+development to maximize business 
+value
+
+Service A
+
+Service B
+
+The Business Analyst 
+engages the business for 
+requirements, helps defining 
+features, user stories & test 
+cases, and validates designs
+
+Functional
+CoPs
+
+Functional
+CoPs
+
+Functional
+CoPs
+
+SO TL
+
+SO TL
+
+DevOps 
+team 1
+
+DevOps 
+team 1
+
+DevOps 
+team 2
+
+DevOps 
+team 2
+
+DevOps 
+team 3
+
+Solutions 
+Architect
+
+Solutions 
+Architect
+
+Common Core services
+
+Shared functions 
+
+(e.g. Service Desk, CI/CD)
+
+Infrastructure functions*
+
+The DevOps Engineer* configures, 
+maintains and monitors the CI/CD 
+toolset to accelerate and de-risk 
+application delivery
+
+*The scope of DevOps engineer role depends on the 
+maturity of the shared infrastructure function.
+
+DevOps Team
+
+The Scrum Master facilitates the 
+team on processes & approach, 
+manages impediments and 
+enables continuous improvement
+
+The Developer writes and verifies 
+code, fixes bugs, executes patch 
+management, maintains asset and 
+configuration repository and 
+functions as 2nd line support
+
+The Test Engineer creates and 
+executes test scripts, automates 
+tests, supports usability testing & 
+UAT, and manages test 
+environments and test data
+
+The Operations Specialist executes 
+day-to-day technology operations 
+(functional maintenance), monitors 
+technology operations, performs 
+Problem Management, manages 
+change processes (Approves/Rejects)
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+19
+
+T-shaped profiles
+Ideally, DevOps team members have a T-shaped profile, teams have a combination of 
+different profiles covering all knowledge and skills areas
+
+Knowledge Areas*
+
+Skills Areas*
+
+Why we advise T-shaped profiles
+
+l
+
+ 
+e
+u
+a
+V
+ 
+s
+s
+e
+n
+i
+s
+u
+B
+
+n
+o
+i
+t
+a
+z
+i
+m
+
+i
+t
+p
+O
+
+ 
+s
+s
+e
+n
+i
+s
+u
+B
+
+s
+i
+s
+y
+a
+n
+A
+
+l
+
+ 
+
+&
+ 
+e
+r
+u
+t
+c
+e
+t
+i
+h
+c
+r
+A
+
+n
+g
+i
+s
+e
+D
+
+i
+
+g
+n
+m
+m
+a
+r
+g
+o
+r
+P
+
+ 
+s
+u
+o
+u
+n
+i
+t
+n
+o
+C
+
+y
+r
+e
+v
+
+i
+l
+
+e
+D
+
+ 
+t
+s
+e
+T
+
+n
+o
+i
+t
+a
+c
+i
+f
+i
+c
+e
+p
+S
+
+ 
+e
+r
+u
+t
+c
+u
+r
+t
+s
+a
+r
+f
+n
+I
+
+g
+n
+i
+r
+e
+e
+n
+g
+n
+E
+
+i
+
+ 
+
+&
+ 
+k
+s
+i
+R
+ 
+,
+y
+t
+i
+r
+u
+c
+e
+S
+
+e
+c
+n
+a
+
+i
+l
+
+p
+m
+o
+C
+
+e
+g
+a
+r
+u
+o
+C
+
+g
+n
+d
+
+i
+
+l
+i
+
+u
+b
+m
+a
+e
+T
+
+ 
+s
+p
+O
+v
+e
+D
+
+i
+
+p
+h
+s
+r
+e
+d
+a
+e
+L
+
+ 
+s
+u
+o
+u
+n
+i
+t
+n
+o
+C
+
+t
+n
+e
+m
+e
+v
+o
+r
+p
+m
+
+i
+
+A T-shaped profile entails that a team member covers 
+different knowledge areas and skills in varying levels 
+of expertise.
+
+A team with T-shaped profiles does not have a 
+hierarchy since everyone’s skills and knowledge 
+complement each other. 
+
+A lack of hierarchy brings a team closer together and 
+creates a sense of shared ownership. 
+
+1
+
+2
+
+3
+
+4
+
+5
+
+l
+
+e
+v
+e
+L
+
+Level 1 — Novice
+
+Level 1 — Novice
+
+Strict obedience to rules, no 
+experience, little situational 
+perception, no discretionary 
+judgement
+
+Level 2 — Competent
+
+Still limited with situational 
+perception, knows the aspect 
+guidelines and treats all attributes 
+and aspects separately, yet equally
+
+Level 3 — Proficient
+
+Sets priorities, actions are seen 
+partly in longer term goals, 
+deliberate planning, standardized 
+procedures
+
+Level 4 — Expert
+
+Perceives deviations from the 
+normal patterns, makes decisions 
+more easily, assesses situations as 
+part of the “big picture”
+
+*DevOps Agile Skills Association (DASA)
+
+© 2022 Deloitte The Netherlands
+
+Level 5 — Master
+Has a wealth of experience, 
+creative solutions and visions, 
+breaks the rules when needed, 
+uses analytic approaches 
+sparingly, makes good decisions 
+quickly yet professionally 
+
+Deloitte DevOps Point of View
+
+20
+
+The mindset of a DevOps team member
+DevOps team members foster certain cultural aspects contributing to the end-to-end 
+ownership of services
+
+A mindset of effectiveness
+We continuously improve our delivery to improve our 
+effectiveness. We define effectiveness as our ability to adapt 
+to “market” circumstances and the success (value) of the 
+product features delivered. Note that this also includes the 
+effectiveness of activities, such as backlog prioritization
+
+A mindset of taking responsibility
+All members of our team are responsible for the 
+complete product, which includes the full 
+delivery cycle as well as operating/providing 
+customer support throughout the lifecycle of the 
+product in a collaborative mindset
+
+An engineering mindset
+We have the desire to utilize our knowledge, 
+skills, and creativity to solve problems, implement 
+product features, and optimize our delivery 
+process. We do not settle for the current status 
+quo. We strive to improve our craftsmanship
+
+Build quality in
+Quality is built-in from the initiation of the 
+teams up to discharge. It is at the heart of 
+every activity. It is never compromised. We 
+value full transparency
+
+Inspirational and fun environment
+An environment in which people perform at best, 
+where they feel inspired, where they want to be, 
+feel welcomed and are encouraged to think out of 
+the box
+
+Continuous learning & 
+Continuous improvement
+We have the desire to explore and learn in all 
+activities we do. We strongly believe that working 
+together, transparency, and sharing knowledge is 
+vital. We care about our job enough to not pass the 
+buck, we want to learn all the parts as a whole and 
+not just our little world
+
+Experimentation & Risk taking
+We always conduct experimentation using solid 
+methodologies to ensure ideas are evaluated on 
+the real value instead of the assumed value
+
+A mindset of product thinking
+Our application is our product. It must deliver 
+value when it runs in production. We need 
+continuous improvements to ensure the 
+application delivers value now and in the future
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+21
+
+Factors influencing DevOps organization design
+DevOps theory doesn’t always apply to practice, client specific factors need to be 
+taken into account for an applicable and effective DevOps organization design
+
+Regulatory 
+
+Requirements 
+
+Existing 
+
+organizational 
+
+Structure
+
+Process & 
+technology 
+
+hetero-
+geneity
+
+Business 
+
+Needs
+
+Client specific factors to be 
+taken into account for an 
+DevOps organization design
+
+Archi-
+tecture
+
+Resource 
+Capacity
+
+Product 
+Varieties
+
+Sourcing 
+
+Model
+
+DevOps organization design is client specific
+
+Setting up DevOps teams or an entire DevOps 
+organization requires understanding of existing, but also 
+future organizational structures.
+
+Client specific factors might increase the complexity and 
+effort that is required to transform towards a DevOps 
+organization.
+
+There is no “one-size-fits-all” DevOps organization 
+design. Client specific factors must be taken into 
+account.
+
+Example considerations for an effective “to-be” DevOps 
+organization design are:
+
+• Keeping some functional hierarchy intact to 
+
+facilitate collaboration with the enterprise
+
+• Re-architecting the technology stack to enable 
+
+DevOps practices
+
+• Adhering to some degree of separation of duties to 
+
+comply with regulations
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+22
+
+Process
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+23
+
+The DevOps model is significantly different from the traditional IT model
+DevOps integrates the application lifecycle into an end-to-end, iterative process
+
+ 
+
+p
+p
+A
+
+v
+e
+D
+
+ 
+
+&
+ 
+a
+r
+f
+n
+I
+
+s
+p
+O
+
+ 
+s
+p
+O
+v
+e
+D
+
+l
+e
+d
+o
+m
+
+Traditional IT Model
+
+Define
+
+Design
+
+Develop
+
+Test
+
+Release & 
+
+Deploy
+
+Operate
+
+Retire
+
+Target State DevOps Model
+
+Plan
+
+Continuous 
+Integration
+
+Continuous 
+
+Testing
+
+Continuous  
+
+Delivery
+
+Continuous 
+Operations
+
+Retire
+
+Continuous Improvement
+
+Implications
+
+§ Straightforward sequential process 
+
+assuming all is known
+
+§ Big chunks of work
+§ Maximizes each process-step, big-
+
+bang delivery
+
+§ Many separated functions (silos) 
+
+with (manual) handoffs
+
+§ Specialization (I-shaped roles)
+§ Rigid change ability
+
+Implications
+
+§ Complex iterative process to 
+
+manage unknowns
+
+§ Small chunks of work
+§ Maximizes flow, incremental delivery
+§ Fewer handoffs (less silos)
+§ Generalists (T-shaped roles)
+§ More flexible to adapt to change
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+24
+
+DevOps leverages technologies to automate the software delivery process
+While extending agile, DevOps optimizes the software delivery process by leveraging  
+CI/CD which automatically promotes developer’s source code to operational solutions
+
+Agile Development
+
+DevOps
+
+Software 
+Delivery
+Process
+
+DevOps 
+Practices
+
+The 
+
+CI/CD 
+Pipeline
+
+Ideation
+
+Requirement & 
+
+Design
+
+Source & 
+Develop
+
+Build & 
+
+Test
+
+Release & 
+
+Deploy
+
+Operate
+
+Monitor
+
+DevOps extends the Agile 
+process and puts emphasis 
+on the software delivery cycle 
+and operations…
+
+Testing
+
+Continuous
+
+Continuous
+
+Continuous
+Integration
+… its practices focus on bridging the stage gate gaps between phases to 
+accelerate throughput by promoting more frequently with smaller products…
+… next to this, DevOps practices incorporate feedback loops continuously in 
+the process for value creation and learning by experience
+
+Continuous
+Operations
+
+Delivery
+
+CI/CD pipelines integrate process into technology
+
+Automates almost everything - Automation drastically reduces time, effort, and risk of human errors
+
+Done means released - Deliver releases for pre-deployment or deploy new releases to productions in minutes instead of months
+
+Everything in Version Control - Versioning ensures that no work gets overwritten and that the latest versions are built upon
+
+Builds Quality Into the Process – The quality of every deliverable is guaranteed errors and problems are detected early
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+25
+
+Technology
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+26
+
+Architecture design in a DevOps implementation
+Realizing the full potential of DevOps requires a flexible, secure and agile technology 
+stack, which often brings the need for architectural redesign
+
+Increased end-to-end delivery speed and maturity poses increased demands on an organization’s 
+
+technology stack. Re-architecting for DevOps therefore requires decisions on some key technology areas:
+
+Modularity & Independent 
+
+Resource & Infrastructure 
+
+Deployment
+
+Management
+
+Fit-for-purpose
+
+Supporting Technology
+
+Responsible DevOps
+
+External dependencies on 
+other technologies and 
+processes can put at risk the 
+rapid deployment of new 
+features. Minimize 
+dependencies by designing 
+modular systems.
+
+Even with the fastest 
+deployment pipeline, going 
+live will not be possible 
+without the proper supporting 
+infrastructure. Effectively 
+managing (standardized) 
+resources is critical for 
+effective DevOps.
+
+The supporting technology to 
+develop a CI/CD pipeline 
+must be consistent with the 
+organization’s objectives, 
+available capabilities and 
+maturity level.
+
+© 2022 Deloitte The Netherlands
+
+In modern IT landscapes, 
+speed cannot be achieved at 
+the cost of security, privacy 
+or compliance. Integrating a 
+risk-based approach in the 
+DevOps process and pipeline 
+is fundamental to ensure full 
+control.
+
+DevOps Deep Dive by TT&A
+
+Modularity as a mean to boost the impact of DevOps
+By decreasing technical & functional dependencies among components, modularized 
+systems can empower DevOps and further increase delivery speed and quality
+
+Monolithic Architecture
+
+Service Oriented Architecture
+
+Microservices Architecture
+
+Modularity is a spectrum, whose 
+level can be influenced by 
+decisions on both software 
+functional segregation and 
+system architecture (e.g. having 
+a messaging layer, splitting DBs 
+etc.)
+
+Presentation Layer
+
+Business Logic Layer
+
+Data Layer
+
+User Channel Layer
+
+Messaging Middleware
+
+Service 1
+
+Service 2
+
+Service 3
+
+Data Layer
+
+MS 1
+
+DB 1
+
+MS 2
+
+DB 2
+
+MS 3
+
+DB 3
+
+Modularity Level
+
+Presentation Layer
+
+Orchestration Layer
+
+Features of modular systems
+
+Independent Deployments
+
+Contract-based Coordination
+
+Localized Failure
+
+ 
+t
+c
+a
+p
+m
+I
+
+s Small components enable organization to 
+p
+O
+v
+e
+D
+n
+o
+
+create small, autonomous teams (e.g. 
+Amazon rule), which are free to deploy
+their changes independently, without
+having to wait for the entire application
+to be deployable.
+
+ 
+
+By enforcing standard services’ interfaces 
+(i.e. how the different services talk to 
+each other), delivery teams can decrease
+the amount and impact of inter-team 
+dependencies and make collaboration 
+more efficient.
+
+As failures are localized, teams can 
+more confidently deploy stand-alone 
+software since, if the service is faulty, 
+the system entirety will not be 
+compromised. 
+
+© 2022 Deloitte The Netherlands
+
+DevOps Deep Dive by TT&A
+
+Cloud is an accelerator for DevOps
+Though DevOps can be applied in an on-premise or hybrid environment, cloud 
+infrastructure is an accelerator that enables high levels of automation
+
+Cloud
+
+On-premise
+
+DevOps can be accelerated by leveraging resource 
+automation principles that are widely applied in the 
+cloud. Several capabilities of cloud infrastructure offer 
+distinct advantages when implementing DevOps:
+
+Achieving an agile and modular technology stack is 
+definitely possible in an on-premise environment. 
+However, there are some disadvantages to building 
+and managing your own infrastructure:
+
+Easy and rapid creation and replication of environments 
+ensures scalability and business continuity
+
+Ease of scaling
+
+Limited control over networking and security policies 
+often prevent easy replication of environments and 
+requires alignment with a wide range of stakeholders
+
+Fully automated (de-)provisioning of infra using 
+infrastructure-as-code enables resource flexibility, 
+resulting in a resilient infrastructure
+
+Environment flexibility
+
+Hard boundaries on resource flexibility due to 
+hardware constraints and integration with 
+legacy systems limit an infrastructure’s resiliency
+
+Services provided by cloud vendors focus on high 
+usability and easy integration, reducing the 
+additional expertise required in teams
+
+Impact on people
+
+On-premise often leads to a significant increase 
+in scope of DevOps teams, and require experts 
+with specific knowledge
+
+© 2022 Deloitte The Netherlands
+
+DevOps Deep Dive by TT&A
+
+A legion of tools are available to support DevOps practices
+As DevOps is a tool intensive practice, a thorough tool selection incorporating client 
+maturity is a crucial part of the DevOps transformation
+
+DevOps is a tool intensive practice 
+
+The voluminous amount of tools available, delivering one or 
+multiple capabilities brings consequences when transforming 
+
+towards a DevOps organization
+
+•
+
+•
+
+Selecting the right tools requires an iterative approach 
+(a procedure per capability)
+Selection is, among others, based on engineering 
+skills, prior experience, or tools (architecture) already 
+in place
+
+© 2022 Deloitte The Netherlands
+
+XebiaLabs published A sample selection of DevOps tools categorized in capabilities
+Source: https://xebialabs.com/periodic-table-of-devops-tools/
+
+Deloitte DevOps Point of View
+
+30
+
+Patterns to setup a CI/CD pipeline
+Selecting the right set of tools (Best-of-Suite, Best-of-Breed or hybrid) for the CI/CD 
+pipeline depends heavily on IT maturity and tech-savviness of the organization
+Applicability of the toolset
+
+Best-of-Suite
+
+“Bundle of end-to-end enterprise 
+
+software applications”
+
+y
+t
+i
+r
+u
+t
+a
+M
+ 
+T
+I
+
+Advantages
+• Control – one central 
+
+place to manage users, 
+applications etc.
+
+• User experience – one 
+similar user interface 
+for the pipeline
+• One integrated 
+
+platform to process the 
+pipeline from
+
+•
+
+Disadvantages
+• Standard solution – Often a 
+bit more rigid than best-of-
+breed solutions, offering 
+less room for specialization
+• Partner dependency – The 
+
+performance and 
+development of the features 
+depend on a single provider
+Integration focus – New 
+features have the objective 
+to integrate with the core 
+instead of being the best of 
+its kind
+
+Hybrid
+
+“Best of both worlds”
+
+Advantages
+• Quality cascade –
+
+iterate upon the current 
+setup and consider best 
+option available
+
+Disadvantages
+• Effort to determine 
+
+concurrent tools – The 
+hybrid approach 
+considered a thorough 
+reconsideration for 
+every requirement 
+between Best of Breed 
+and Suite
+
+Tech-savviness
+
+Best-of-Breed
+
+“Selecting the best product of its kind”
+
+Advantages
+• Flexibility – you are not depending on a 
+
+one-size-fits-all solution1
+Independent – you can pick and choose 
+new capabilities regardless of the core 
+solution
+
+•
+
+Disadvantages
+• Maintenance – requires knowledge of the 
+setup of each, and dependencies between 
+applications
+
+• Vendor segregation – issue solving might 
+
+cover multiple vendors with different 
+support models
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+31
+
+A basic functional flow through a CI/CD pipeline
+A CI/CD Pipeline can be build in various ways considering the desired tooling patterns, 
+covering the same functional flow with different tools and integrations between them 
+
+Source & Develop
+
+Build & Test
+
+Release & Deploy
+
+Operate & Monitor
+
+Distributed source code repository and 
+version control system manages code 
+changes during software development
+
+Build and test automation process the 
+application code based on the latest 
+changes in the source code repository
+
+Central repository manages and 
+versions the released application 
+
+artifacts and dependencies
+
+Monitoring the performance of the team 
+in the software delivery process using 
+
+DevOps metrics and KPIs
+
+Source Code Repository 
+
+and Version Control
+
+Code Build and 
+
+Automated Testing
+
+Artifact Repository
+
+Software Delivery Process
+
+Agile Planning and 
+
+Collaboration
+
+Collaboration environment supports 
+the delivery process and planning of 
+
+the DevOps Teams
+
+Test Strategy, Execution 
+
+and Reporting
+
+Test repository manages test 
+
+strategies, test cases, test execution 
+
+and reporting of test results
+
+Automated Deployment
+
+Software Operations
+
+Deployment automation deploys the 
+
+released application artifacts and 
+
+dependencies to target environments
+
+Monitoring of the deployed system’s 
+
+health & performance using application 
+
+and infrastructure monitors
+
+Best-of-Suite
+
+Hybrid
+
+Best-of-Breed
+
+Azure DevOps covers the full extent of the CI/CD 
+
+pipeline, with no external integration required
+
+Only a few interfaces are required as Atlassian’s 
+suite covers the majority of required functionality
+
+The pipeline orchestrator (Jenkins) becomes the 
+central component to integrate all applications
+
+© 2022 Deloitte The Netherlands
+
+Same suite, no interface
+Interface between tools/suites
+
+Deloitte DevOps Point of View
+
+32
+
+Security at every step of the software delivery lifecycle
+DevOps requires a strong focus on integrating security automation in the deployment 
+pipeline, as well as including security* in the regular development process
+
+e
+r
+a
+w
+
+t
+f
+o
+S
+
+e
+r
+u
+t
+c
+u
+r
+t
+s
+a
+r
+f
+n
+I
+
+DevOps Team
+
+Source & Develop
+
+Build & Test
+
+Release & Deploy
+
+Operate & Monitor
+
+• Security in 
+regular user story
+• Code Reviews by 
+
+peers
+
+• Run automated security 
+tests and static analysis
+• Only use whitelisted 
+open-source code repos
+
+• Deployment is fully 
+
+automated
+
+• Security tests are 
+
+incorporated
+
+• Run vulnerability 
+scans & automated 
+
+• Specific use cases are 
+
+pen-tests
+
+monitored
+
+Validation 
+
+& Standards ü a
+
+against Baseline 
+
+Validation 
+
+& Standards ü a
+
+against Baseline 
+
+Validation 
+
+& Standards ü a
+
+against Baseline 
+
+•
+
+Image hardening
+• Minimalistic VM  
+
+images
+
+• All standard images 
+
+are scanned for 
+
+compliance
+
+• Secrets are managed 
+
+securely
+
+• No change on running 
+
+• Conduct hardening 
+
+instance
+
+review
+
+• Standard logging and 
+
+monitoring
+
+• Self healing systems
+
+The items above are examples of DevOps activities/controls that can be put in place across 
+
+the different stages of a CI/CD pipeline, for both software and infrastructure
+
+* Although security is an inherent component of every step of the DevOps cycle, security begins by incorporating it into the design of the application. 
+
+© 2022 Deloitte The Netherlands
+
+DevOps Deep Dive by TT&A
+
+Operating Model
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+34
+
+The changing IT Operating Model
+DevOps disrupts multiple dimensions of the IT Operating Model; synergies arise when 
+combined with next generation technologies and ways-of-working
+
+Organizational 
+
+Model
+
+Architecture 
+
+Model
+
+Delivery Model
+
+Release
+Model
+
+Hosting
+Model
+
+Sourcing Model
+
+Support Model
+
+Hierarchical 
+Organization
+
+Monolithic
+
+Waterfall
+
+Annually & 
+Quarterly
+
+Physical
+
+Datacenter
+
+In-house
+
+Practice
+Model
+
+Process 
+Driven
+
+Product Line
+Organization
+
+N-Tier
+
+Agile
+
+Monthly
+
+Practice
+Driven
+
+Virtual 
+Machines
+
+Traditional 
+Outsourcing 
+
+(Towers)
+
+Autonomous 
+
+Microservices 
+
+Teams
+
+& API
+
+Continuous 
+
+Delivery
+
+On Demand
+
+Value Stream
+
+Cloud & 
+Containers
+
+Service 
+Brokering
+
+Self Service & 
+
+Self Help
+
+Tier Based
+L1
+
+L2
+
+L3
+
+Skilled 
+Support
+
+l
+a
+n
+o
+
+i
+t
+i
+d
+a
+r
+T
+
+ 
+
+d
+e
+v
+l
+
+o
+v
+E
+
+ 
+
+n
+e
+G
+ 
+t
+x
+e
+N
+
+© 2022 Deloitte The Netherlands
+
+35
+
+DevOps Target Operating Model (TOM)
+A DevOps TOM lands the DevOps way-of-working in the organization by describing the 
+DevOps practices using Deloitte’s framework ‘Technology TOM in a box’
+
+Technology TOM in a box
+
+The Technology TOM in a box is a holistic framework to 
+describe the governance structure of an IT organization and 
+how it functions as an entity
+
+DevOps practices
+
+The capabilities of the DevOps practices will be described 
+through the dimensions of the Technology TOM in a box
+
+DevOps 
+
+TOM
+
+The DevOps Target Operating Model (TOM) outlines the 
+governance structures on how an IT organization should 
+govern and operate the DevOps practices
+
+© 2022 Deloitte The Netherlands
+
+36
+
+Defining a DevOps Operating Model
+There is a logical order to defining and documenting the interrelated dimensions of a  
+DevOps Target Operating Model
+
+The DevOps TOM is a number of interrelated dimensions that describe the governance structure of an IT 
+organization and how it functions as an entity. 
+
+1
+
+What is the overarching mission, which services are the 
+DevOps organization going to deliver to achieve this 
+mission, and which personas produce and consume these 
+services?
+
+Mission 
+
+Personas
+
+Services
+
+2
+
+How do capabilities deliver these services, and, 
+on a high-level, how are these capabilities 
+structured, sourced and funded by the DevOps 
+organization?
+
+Capabilities
+& Skills
+
+Organization 
+Structure
+
+Governance & 
+Decision Rights
+
+Sourcing & 
+Ecosystems
+
+Funding &
+Charging
+
+3
+
+How do DevOps teams collaborate on a 
+detailed level to deliver these services; 
+individual roles & responsibilities, 
+processes, tooling and metrics?
+
+Roles & Res-
+ponsibilities
+
+Tooling & 
+Automation
+
+Culture / 
+work style
+
+Processes & 
+Interactions
+
+Metrics & 
+KPI’s
+
+Collaboration 
+& Location
+
+© 2022 Deloitte The Netherlands
+
+37
+
+Detailing the DevOps practices
+The DevOps TOM describes capabilities that are part of the DevOps practices
+
+People
+
+Process
+
+Technology
+
+Continuous 
+Integration
+
+Continuous 
+
+Testing
+
+Continuous 
+
+Delivery
+
+Continuous 
+Operations
+
+Test Automation
+
+Test Environments & Data
+
+Bug Reporting & Defect Management
+
+Data Security
+
+Telemetry & Logging
+Metrics / Dashboards
+Self-Service Portals
+Incident Response
+
+DevOps 
+capabilities
+(non-exhaustive)
+
+System Architecture
+Development Practices
+
+Development Environments
+
+Source Code & Version Control
+
+Automated Code Build
+
+Release Orchestration
+Deployment Automation
+
+Configuration & Asset Management
+
+Environment Management
+Infrastructure automation
+CI/CD Metrics and Tracking
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+38
+
+DevOps operating model differentiators
+The DevOps way-of-working has several key changes on the IT operating model that 
+differentiate from the traditional way-of-working
+
+Differentiators of the DevOps TOM
+Differentiators of the DevOps TOM
+
+People
+
+Process
+
+Technology
+
+Impact:
+• Service Oriented Organization
+
+Resources organized around 
+services, focused on value
+
+• Service Brokering 
+
+As-a-service delivery of composed 
+products with an ecosystem of 
+partners
+
+• Autonomous teams
+
+Self-organizing teams, 
+autonomously in their decision 
+making
+
+• Cross functional teams
+
+Multiple disciplines in a team that 
+share E2E responsibility
+
+Impact:
+• Release On Demand
+
+DevOps practices (CI/CD) for 
+iterative and frequent releases
+
+• Continuous delivery
+
+Slicing the work into smaller 
+chunks that add value to 
+customers
+
+• E2E traceability
+
+Greater visibility and transparency 
+on service delivery 
+
+• Value stream 
+
+Siloes broken down between 
+business and IT
+
+• Self Service & Self Help
+
+service request portals automate 
+request fulfillment 
+
+Impact:
+• Automate everything
+
+Tools automate processes, 
+minimize handoffs and maximize 
+checkpoints
+
+• Modular App. Architectures
+
+Architecture (e.g. Micro-Services & 
+API) enables autonomous teams to 
+develop and release independently
+
+• Infrastructure as code
+
+Next gen hosting (e.g. Cloud & 
+Containers) enables automated 
+environment provisioning
+
+• Venture-Capital Budgeting 
+
+Funding dependent on minimal 
+viable product, and its 
+performance
+
+© 2022 Deloitte The Netherlands
+
+Source: Deloitte Technology TOM in a box
+
+39
+
+How do I implement DevOps?
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+40
+
+DevOps transformation approach
+The transformation approach outlines the Deloitte service used to collaboratively drive 
+and coordinate a successful DevOps transformation, consisting of four different phases
+
+1
+
+Start Project
+
+3 – 6 months
+
+2
+
+Transition Delivery
+
+3 months
+
+3
+
+Coach & Scale
+
+6 – x months*
+
+4
+
+Roll-off
+
+1 – 2 months
+
+Start with two project tracks; 
+
+design and execute
+
+Transition into a bi-modal 
+
+organization where coaching 
+
+and co-creation is key
+
+Onboard, coach and handover 
+new virtual teams to scale the 
+
+bi-modal organization
+
+Roll-off once the client is 
+mature enough to continue 
+
+themselves
+
+Key objectives
+
+Key objectives
+
+Define mission and IT services 
+in scope
+
+Start design track for DevOps 
+TOM and roadmap
+
+Start execution track to for 
+CI/CD implementation
+
+Setup a DevOps CoE as driver 
+of the transformation
+
+Onboard CI/CD Services as the 
+first DevOps team
+
+Replace traditional governance 
+with DevOps ceremonies
+
+Key objectives
+
+Shape the DevOps TOM by 
+learning from experiments
+
+Experiment with CI/CD to 
+accelerate value delivery
+
+Show value using DevOps 
+Metrics
+
+Key objectives
+
+Stop coaching efforts once the 
+organization is mature enough
+
+Handover of transformation 
+responsibilities
+
+Project 
+
+Management
+
+Stream 1: 
+DevOps TOM
+
+Stream 2: 
+
+CI/CD
+
+n
+o
+i
+t
+i
+s
+n
+a
+r
+T
+
+DevOps CoE
+
+Rollout
+Rollout
+
+DevOps Team 1:
+CI/CD Services
+
+Coach
+
+PO
+
+Coach
+
+PO
+
+DevOps 
+Team 2
+
+DevOps 
+Team n
+
+Onboard
+
+Handover
+
+Coach
+
+Onboard
+
+Handover
+
+Coach
+
+Coach
+
+Team 
+members
+
+Coach
+
+Team 
+members
+
+Speed metrics
+
+Lead Time
+
+Deployment 
+Frequency
+
+Stability metrics
+Time to 
+Restore
+
+Change fail
+
+DevOps 
+Team n
+
+PO
+
+Team 
+members
+
+D
+e
+v
+O
+p
+s
+ 
+o
+r
+g
+a
+n
+i
+z
+a
+t
+i
+o
+n
+
+© 2022 Deloitte The Netherlands
+
+* Depending on # of teams to onboard
+
+41
+
+Deloitte
+
+Client
+
+Combined
+
+Reporting
+
+Coaching
+
+What are the challenges of implementing DevOps?
+DevOps majorly challenges skills of everyone involved: management and team. It may 
+lead to development slowdown and will not compensate for lack of responsibility
+
+People
+
+Process        
+
+Technology
+
+Challenges:
+
+Challenges:
+
+Challenges:
+
+• Skill Challenge: Difficult to replicate 
+
+skills across every DevOps team in 
+your organization and acquiring people 
+with the DevOps skills may be 
+challenging
+
+• Management Challenge: DevOps can 
+mean management challenges for your 
+team leads
+
+• No Magic: DevOps will not 
+
+compensate for potential lack of 
+responsibility in your organization
+
+• Lack of Overview: Progress and 
+
+stability are spread across the teams 
+and overview may lack
+
+• Dev Slowdown: Operations may 
+hamper progress in development
+
+• Self-organization Challenge: Clear 
+Service-Level Structures in operations 
+may be challenging
+
+• Application architecture:
+
+Transforming an organization from 
+being monolithic to work with 
+microservices and API’s
+
+• Choice of Tools: difficult to choose 
+appropriate tooling when knowledge 
+about the technology behind it is 
+lacking
+
+• Integration with existing IT 
+
+landscape: Pipeline platform 
+integration with enterprise IT (network, 
+infra, hardware, security,  applications) 
+is often experienced as difficult
+
+© 2022 Deloitte The Netherlands
+
+42
+
+Key Lessons Learned
+During our engagements we gathered the following key takeaways that we will bring 
+to future projects
+
+People
+
+You cannot “buy DevOps”
+
+Management support is crucial
+
+Break down silos
+
+Assign champions from client
+
+DevOps adoption cannot be bought and 
+“bolted on” the existing organization. It 
+requires a cultural shift around how 
+people deliver their work
+
+Management involvement is crucial in 
+the DevOps transformation, as change 
+starts and stops with them
+
+Break down silos. Not only between 
+departments, but also between 
+organizations
+
+Ensuring the support of the client can 
+be accelerated by having a champion 
+from their side spreading the DevOps 
+culture and principles
+
+Process
+
+Consider secondary impacts
+
+Collaboration is key
+
+DevOps ≠ Agile
+
+Focus on E2E responsibility
+
+Product roadmaps will be impacted and 
+delivery bottlenecks reduced. New 
+budget to build a DevOps organization 
+will be needed
+
+DevOps requires close collaboration 
+across dev, test, operations and 
+business teams to effectively deliver 
+value to the organization
+
+DevOps can be seen as an extension of 
+Agile, with the same level of agility 
+driven into development, test and 
+operations
+
+Limit handovers as much as possible, 
+teams must adopt an end-to-end 
+responsibility for the product or service 
+they deliver
+
+Technology
+
+Modern architecture is critical
+
+Show value quickly
+
+DevOps ≠ Automation
+
+Use Cloud as an accelerator
+
+Platforms built on modern architectures 
+based on modular design, decoupling 
+and good componentization enables 
+deeper adoption of DevOps
+
+‘Prove’ the DevOps concept by 
+demonstrating working solutions early 
+and often (e.g. CI/CD tooling)
+
+Release and Deployment Automation or 
+App Release Automation are only a part 
+of DevOps. End-to-end automation is 
+key
+
+Ensure parity between cloud and on-
+premise implementations (e.g. Azure 
+DevOps)
+
+Operating 
+
+Model
+
+Collaborate with Tech Stream
+
+Change incrementally
+
+DevOps ≠ Organization
+
+Design the DevOps operating model in 
+parallel and close collaboration with the 
+technology implementation
+
+Apply an agile approach for adopting 
+DevOps and introduce change 
+incrementally with focus on the 
+outcomes
+
+There are different organizational 
+patterns to setting up DevOps and it 
+doesn’t always have to be making it a 
+separate organization
+
+© 2022 Deloitte The Netherlands
+
+DevOps journey is client 
+specific
+DevOps target operating model 
+transformation depends heavily on 
+where the client is in their DevOps 
+journey
+
+Deloitte DevOps Point of View
+
+43
+
+Deloitte Accelerators
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+44
+
+Deloitte DevOps Maturity Assessment Offerings
+To understand the current state DevOps capabilities and to identify areas for 
+improvement, we have two assessment methodologies available. 
+
+? DORA provides a SaaS questionnaire that benchmarks DevOps 
+
+performance against 2000+ leading Enterprises across industries
+
+t
+i
+
+§ “Gold standard” for DevOps assessments
+§ Compare your results against others in industry
+§ Two assessments included – one to baseline and one to measure 
+
+progress
+
+§ Provides priorities for capability improvement
+
+Deloitte’s DevOps Maturity Assessment (DDMA) is an extensive 
+questionnaire for assessing current state against desired future state 
+maturity of DevOps capabilities across the DevOps domains: from 
+Release Planning to Continuous Deployment and Monitoring. 
+
+§ 180 questions along each of the DevOps domains (Release 
+
+Planning, Continuous Development, Continuous Integration, 
+Continuous Testing, Continuous Deployment, Continuous 
+Monitoring)
+
+§ Assesses maturity against desired future state
+§ Identifies areas for capability improvement
+
+Deloitte receives a 30% discount from DORA; will be an additional 
+cost on top of pilots
+
+Included in price of DevOps KickStart or DevOps Dojo
+
+ 
+s
+i
+ 
+t
+a
+h
+W
+
+ 
+s
+t
+i
+f
+e
+n
+e
+B
+
+t
+s
+o
+C
+
+t
+u
+p
+t
+u
+O
+
+e
+l
+p
+m
+a
+S
+
+Industry 
+Benchmark
+
+Capability 
+Prioritization
+
+Release Planning 
+
+Maturity 
+
+Continuous Integration 
+
+Maturity 
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+45
+
+Deloitte Global Accelerators
+Our Global DevOps Community of Practice has a wide variety of accelerators available 
+that we can use in our engagements 
+
+Learning
+
+Sales Materials
+
+Tools and Enablers
+
+Eminence and Point of Views
+
+Learning Series
+Basic introduction course 
+to various DevOps practices
+
+Proposal templates & DevOps 
+brochures
+Templates & brochure to help you 
+kickstart your DevOps proposal
+
+DevOps Local toolkit
+An integrated toolkit of local 
+DevOps tools to gain hands-on 
+experiences
+
+Eminence
+Examples of Deloitte DevOps 
+materials published in popular 
+media
+
+Learning Resources
+A collection of documents to assist 
+learning DevOps and specific 
+elements or specific vendors
+
+DevOps Qualifications
+‘Quals’ to help you display 
+Deloitte’s capability to deliver 
+DevOps transformations, including 
+tooling
+
+Videos & Demos
+A collection of videos and demos 
+regarding Deloitte methodologies 
+and instructions for DevOps 
+tooling
+
+DevOps Case studies
+Case studies of client 
+engagements, with success stories 
+and demos. The Client demo can 
+showcase DevOps automation 
+capabilities
+
+Note: non-exhaustive, Global examples, which may be updated continuously
+
+Fortify
+JRebel
+Performance Center
+
+Deloitte supplied tools
+Tools that can be supplied for 
+client engagements:
+• Agile Manager
+• HP Application Lifecycle Management   
+•
+•
+•
+• SonarQube
+• Unified Functional Testing and UFT Pro
+Enablers
+Enabling materials for specific 
+vendors, industries, such as the 
+Cloud Compass, PoC for SAP or 
+Google Cloud enablers, Cards for 
+Agility, Technology TOM in a Box
+
+DevOps Point of Views (PoV)
+• Cloud platforms
+• Collaboration tools
+• Development suite tools
+• Software Build tools
+• Software Deployment tools
+• Container persistence
+• DevSecOps
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+46
+
+Client example 1
+DevOps journey and CI/CD 
+pipeline implementation
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+47
+
+Client example 1: Global parcel delivery services company
+We took our client on a DevOps transformation journey across all five dimensions to 
+streamline the software delivery lifecycle of their mission critical system 
+
+Process
+Develop a chain of full end-to-end 
+processes to facilitate the DevOps way-of-
+working and continuous software delivery
+• Described CI/CD processes to operate 
+
+•
+
+the pipeline through all DevOps 
+practices
+Implemented continuous feedback 
+loops into process flows to facilitate 
+continuous improvement
+
+• Defined and implemented auxiliary 
+
+processes to support and smoothen the 
+execution of the DevOps lifecycle
+
+Organization & Culture
+Designed and implemented a fully fledged 
+DevOps organization, along with teams 
+covering the full lifecycle of services, as well 
+as defining a culture to facilitate 
+collaboration, knowledge sharing and 
+continuous improvement
+• T-shaped role descriptions for team 
+
+members
+
+• Described ways-of-working to enhance 
+
+visibility and feedback
+
+• Defined a culture based on CALMR 
+
+principles, with accompanying metrics to 
+enhance adoption
+
+© 2022 Deloitte The Netherlands
+
+Operating Model
+Designed and implemented a 
+governance structure to 
+successfully have business-
+and value-driven DevOps 
+teams that take full ownership 
+of their product/service, 
+including:
+
+• Tailored DevOps Target 
+
+Operating Model
+
+Technology
+From requirements, to tool selection, architecture 
+design and full implementation; we built a CI/CD 
+pipeline base on MS Azure DevOps to enable 
+continuous integration and continuous delivery
+• Automated as much as possible, while 
+
+maintaining stage gates for deploying to 
+mission critical environments
+
+• Supported persistent configuration 
+
+management to deliver tailored software to 
+distributed, distinct production systems
+
+Data
+Obtain as much insight, by logging all data 
+and monitoring relevant metrics, by 
+employing DataOps
+• Gather data from CI/CD process
+•
+
+Infrastructure logging & monitoring of 
+develop, test and production environments
+• Operational data logging, monitoring and 
+analytics on operational process execution
+• Provide dashboards to view and report on 
+
+performance
+
+Deloitte DevOps Point of View
+
+48
+
+Client example 2
+A CI/CD Pipeline for a Banking 
+Platform
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+49
+
+Client example 2: CI/CD pipeline
+Deloitte developed an Open Banking Platform as a global asset with an CI/CD pipeline 
+to ensures continuous integration and deployment
+
+| Build & Deployment
+
+Security & 
+
+Quality Control
+
+Local 
+
+Development
+
+Secure coding 
+guidelines & 
+
+Training
+
+Code Repository (GIT) 
+
+Code review & 
+Security checks
+
+Unit tests, static code 
+checks, code smells
+
+Security checks & 
+
+Source code 
+validation
+
+Repository Management
+
+Check if the repositories 
+used are whitelisted (only 
+
+approved software)
+
+Microservice is packaged in 
+Docker container and published 
+to container registry
+
+Image is hardened and 
+checked if in accordance 
+
+with security baseline
+
+Amazon ECR handles 
+the container registry
+
+An image scan is performed to 
+detect known vulnerabilities
+
+Container is deployed 
+to the platform
+
+Validation of security 
+
+baseline
+
+Secrets Management
+
+Container is immutable 
+
+Controlled deployment 
+to production & testing 
+environment based on 
+agreed release candidate
+
+Manual approval
+
+Fuzz testing, Pentesting & 
+
+Vulnerability scans
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+50
+
+Client Example 3
+Test Automation for a Banking 
+Application
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+51
+
+Client example 3: Automating End-to-End Testing
+We helped our customer to setup their testing capability, a vital but time-consuming 
+part of the software delivery process
+
+S O F T W A R E V E N D O R S
+
+Customer aims to speed up release and ensure software 
+quality through UI-based E2E Integration and Acceptance 
+testing with the Selenium Framework
+
+Ideation
+
+Requirement & 
+
+Design
+
+Develop
+
+Build & 
+Deploy
+
+Test & 
+
+Acceptance
+
+Release
+
+Operate & 
+Monitor
+
+C U S T O M E R
+
+C U S T O M E R
+
+Test Phase
+
+Type of tests
+
+System
+
+Integration
+
+E2E
+
+Acceptance
+
+PAT
+
+• System tests
+
+• Bug testing
+• Unit testing
+
+• Deployment tests
+
+• Deployment tests
+•
+
+Integration tests based on 
+user stories
+
+• Regression tests (E2E)
+
+• Deployment tests
+• Business Acceptance 
+Regression tests (E2E)
+
+• Non-functional tests
+
+• Performance
+• Security
+• Disaster Recovery
+
+• Prepare for go-live execution
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+52
+
+Client example 3: Automating End-to-End Testing
+Using a test automation framework based on Selenium, Deloitte delivered a total of 15 
+automated end-to-end test cases
+
+Ideation
+
+Requirement & 
+
+Design
+
+Develop
+
+Build & 
+Deploy
+
+Test & 
+
+Acceptance
+
+Release
+
+Operate & 
+Monitor
+
+CI/CD Automation Server
+
+Develop
+
+Build
+
+Run
+
+Behavior-Driven 
+
+Development
+
+Given I navigate to “Deloitte.com”
+And     I click “About Deloitte”
+Then   I should see title “About us”
+
+Build Automation Tool
+
+Web Browser Automation 
+
+Framework
+
+Trigger test run based on
+• Time
+• Code commit
+•
+JIRA update
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+53
+
+Recommended resources
+In case you got excited and would like to learn more…
+
+Books:
+• The DevOps Handbook: How to Create World-Class Agility, Reliability, and Security in Technology Organizations 
+
+− by Gene Kim, John Willis, Patrick Debois, Jez Humble
+
+• The Phoenix Project 
+
+− by Gene Kim, Kevin Behr, George Spafford
+
+• Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation 
+
+− by Jez Humble and David Farley
+
+• Accelerate: Building and Scaling High Performing Technology Organizations 
+
+− by Nicole Forsgren, Jez Humble, Gene Kim
+
+Websites:
+• https://notafactoryanymore.com/
+
+Video’s:
+•
+
+John Smart (Deloitte colleague) at the DevOps Summit: https://www.youtube.com/watch?v=-Rq-fuiKNCU
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+54
+
+Appendices
+
+© 2022 Deloitte The Netherlands
+
+Additional contributors
+A big thanks to all our colleagues that contributed to this Point of View
+
+Andries van Dijk
+Director
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 52 04 87 05
+anvandijk@deloitte.nl
+
+Boris Smits
+Consultant
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 82 67 44 36 
+bsmits@deloitte.nl
+
+Audrey Sie
+Analyst
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 50 06 26 13 
+ausie@deloitte.nl
+
+Tessa van den Berg
+Senior Manager
+Human Capital
+Deloitte Consulting
+
++31 6 10 04 25 78
+tesvandenberg@deloitte.nl 
+
+Tom Pennings
+Consultant
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 22 17 87 17 
+tpennings@deloitte.nl
+
+Jasper Lelijveld
+Analyst
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 50 06 25 77 
+jalelijveld@deloitte.nl
+
+Andreas Boon
+Manager
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 83 33 96 09 
+aboon@deloitte.nl
+
+Jan Prüst
+Consultant
+Technology, Strategy & 
+Transformation
+Deloitte Consulting
++31 6 82 51 86 04
+jprust@deloitte.nl
+
+© 2022 Deloitte The Netherlands
+
+Deloitte DevOps Point of View
+
+56
+
+Deloitte refers to one or more of Deloitte Touche Tohmatsu Limited, a UK private company limited by guarantee (“DTTL”), its network of member firms, and their related entities. DTTL and each of its member firms
+are legally separate and independent entities. DTTL (also referred to as “Deloitte Global”) does not provide services to clients. Please see www.deloitte.nl/about to learn more about our global network of member
+firms.
+Deloitte provides audit, consulting, financial advisory, risk advisory, tax and related services to public and private clients spanning multiple industries. Deloitte serves four out of five Fortune Global 500® companies
+through a globally connected network of member firms in more than 150 countries and territories bringing world-class capabilities, insights, and high-quality service to address clients’ most complex business
+challenges. To learn more about how Deloitte’s approximately 245,000 professionals make an impact that matters, please connect with us on Facebook, LinkedIn, or Twitter.
+This communication contains general
+information only, and none of Deloitte Touche Tohmatsu Limited, its member firms, or their related entities (collectively, the “Deloitte Network”) is, by means of this
+communication, rendering professional advice or services. Before making any decision or taking any action that may affect your finances or your business, you should consult a qualified professional adviser. No entity
+in the Deloitte Network shall be responsible for any loss whatsoever sustained by any person who relies on this communication.
+© 2022 Deloitte The Netherlands
+
+
