@@ -11,12 +11,14 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.chains import ConversationalRetrievalChain
+from dotenv import load_dotenv
+
+load_dotenv()
+print(os.environ.get('API_KEY'), type(os.environ.get('API_KEY')))
 
 os.environ["OPENAI_API_KEY"] = "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"
 
 """# 1. Loading PDFs and chunking with LangChain"""
-
-# You MUST add your PDF to local files in this notebook (folder icon on left hand side of screen)
 
 # Simple method - Split by pages
 loader = PyPDFLoader("./assets/test.pdf")
