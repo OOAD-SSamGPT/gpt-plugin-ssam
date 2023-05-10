@@ -52,8 +52,7 @@ class PageviewWidget(QScrollArea):
                         pix.stride, QImage.Format_RGB888)
         pixmap = QPixmap.fromImage(qimage)
         self.label.setPixmap(pixmap)
-        self.label.resize(pixmap.size())
-
+    
     def resizeEvent(self, event):
         self.draw_page()
         self.resized.emit(self.scale)
