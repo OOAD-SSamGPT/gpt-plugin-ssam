@@ -14,9 +14,8 @@ from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv
 
 load_dotenv()
-print(os.environ.get('API_KEY'), type(os.environ.get('API_KEY')))
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
 
 """# 1. Loading PDFs and chunking with LangChain"""
 

@@ -10,7 +10,6 @@ from idx_widget import IdxWidget
 from scale_widget import ScaleWidget
 from note_widget import NoteWidget
 
-from controller import Controller
 
 class MainWindow(QMainWindow):
 
