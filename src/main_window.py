@@ -9,7 +9,7 @@ from preview_widget import PreviewWidget
 from idx_widget import IdxWidget
 from scale_widget import ScaleWidget
 from note_widget import NoteWidget
-
+from chat_widget import ChatWidget
 
 class MainWindow(QMainWindow):
 
@@ -28,6 +28,7 @@ class MainWindow(QMainWindow):
         self.pageview_widget = PageviewWidget()
         self.pageview_widget.resized.connect(self.page_resized)
         self.note_widget = NoteWidget()
+        self.chat_widget = ChatWidget()
         self.preview_widget = PreviewWidget()
         self.preview_widget.idxChanged.connect(self.idx_changed)
         self.idx_widget = IdxWidget()
@@ -47,7 +48,8 @@ class MainWindow(QMainWindow):
         self.main_splitter = QSplitter()
         self.main_splitter.addWidget(self.preview_widget)
         self.main_splitter.addWidget(self.sub_splitter)
-        self.main_splitter.setSizes([100, 1000])
+        self.main_splitter.addWidget(self.chat_widget)
+        self.main_splitter.setSizes([100, 1000, 500])
 
         layout = QHBoxLayout()
         layout.addWidget(self.main_splitter)
@@ -63,7 +65,7 @@ class MainWindow(QMainWindow):
 
         menubar = self.menuBar()
         menubar.setNativeMenuBar(False)
-        filemenu = menubar.addMenu('&File')
+        filemenu = menubar.addMenu('File')
         filemenu.addAction(open_action)
         filemenu.addAction(save_action)
 
