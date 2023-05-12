@@ -9,7 +9,8 @@ from preview_widget import PreviewWidget
 from idx_widget import IdxWidget
 from scale_widget import ScaleWidget
 from note_widget import NoteWidget
-
+from chat_widget import ChatWidget
+from chatbot_controller import ChatbotController
 
 class MainWindow(QMainWindow):
 
@@ -28,6 +29,8 @@ class MainWindow(QMainWindow):
         self.pageview_widget = PageviewWidget()
         self.pageview_widget.resized.connect(self.page_resized)
         self.note_widget = NoteWidget()
+        self.chat_widget = ChatWidget()
+        self.chat_widget.chatbotRequested.connect(self.load_chatbot)
         self.preview_widget = PreviewWidget()
         self.preview_widget.idxChanged.connect(self.idx_changed)
         self.idx_widget = IdxWidget()
@@ -47,7 +50,8 @@ class MainWindow(QMainWindow):
         self.main_splitter = QSplitter()
         self.main_splitter.addWidget(self.preview_widget)
         self.main_splitter.addWidget(self.sub_splitter)
-        self.main_splitter.setSizes([100, 1000])
+        self.main_splitter.addWidget(self.chat_widget)
+        self.main_splitter.setSizes([100, 1000, 500])
 
         layout = QHBoxLayout()
         layout.addWidget(self.main_splitter)
@@ -63,7 +67,7 @@ class MainWindow(QMainWindow):
 
         menubar = self.menuBar()
         menubar.setNativeMenuBar(False)
-        filemenu = menubar.addMenu('&File')
+        filemenu = menubar.addMenu('File')
         filemenu.addAction(open_action)
         filemenu.addAction(save_action)
 
@@ -93,6 +97,7 @@ class MainWindow(QMainWindow):
         self.preview_widget.set_pdf(self.pdf)
         self.pageview_widget.set_page(self.pdf[0])
         self.note_widget.load_notes(self.pdf)
+        self.chat_widget.init_initial_ui()
 
     def save_file(self):
         if self.pdf:
@@ -126,6 +131,11 @@ class MainWindow(QMainWindow):
 
     def page_resized(self, scale):
         self.scale_widget.set_scale(scale)
+    
+    def load_chatbot(self):
+        if self.pdf:
+            self.chatbot_controler = ChatbotController(self.pdf, self.chat_widget.push_answer)
+            self.chat_widget.requested.connect(self.chatbot_controler.handle_request)
 
 
 if __name__ == '__main__':
