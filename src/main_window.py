@@ -10,6 +10,7 @@ from idx_widget import IdxWidget
 from scale_widget import ScaleWidget
 from note_widget import NoteWidget
 from chat_widget import ChatWidget
+from chatbot_controller import ChatbotController
 
 class MainWindow(QMainWindow):
 
@@ -29,6 +30,7 @@ class MainWindow(QMainWindow):
         self.pageview_widget.resized.connect(self.page_resized)
         self.note_widget = NoteWidget()
         self.chat_widget = ChatWidget()
+        self.chat_widget.chatbotRequested.connect(self.load_chatbot)
         self.preview_widget = PreviewWidget()
         self.preview_widget.idxChanged.connect(self.idx_changed)
         self.idx_widget = IdxWidget()
@@ -128,6 +130,10 @@ class MainWindow(QMainWindow):
 
     def page_resized(self, scale):
         self.scale_widget.set_scale(scale)
+    
+    def load_chatbot(self):
+        self.chatbot_controler = ChatbotController(self.pdf, self.chat_widget.push_answer)
+        self.chat_widget.requested.connect(self.chatbot_controler.handle_request)
 
 
 if __name__ == '__main__':
