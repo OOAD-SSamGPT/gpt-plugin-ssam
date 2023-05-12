@@ -7,7 +7,7 @@ class ChatWidget(QWidget):
     
     def __init__(self):
         super().__init__()
-        self.initial_state = True
+        self.initial_state = False
         self.min_width = 0
         self.space = 30
         self.margin = 5
@@ -18,12 +18,21 @@ class ChatWidget(QWidget):
         self.setMinimumWidth(self.min_width)
     
     def init_initial_ui(self):
+        if self.initial_state:
+            return
+        
+        deleteItemsOfLayout(self.layout())  
+        self.initial_state = True
+
         chatbot_button = QPushButton()
         chatbot_button.setText('Load Chatbot')
         chatbot_button.clicked.connect(self.load_chatbot)
         self.layout().addWidget(chatbot_button)
 
     def init_chatbot_ui(self):
+        deleteItemsOfLayout(self.layout())  
+        self.initial_state = False
+
         self.history_box = QScrollArea()
         self.history_box.setWidgetResizable(True)
         self.history_box.setFocusPolicy(Qt.NoFocus)
@@ -45,9 +54,7 @@ class ChatWidget(QWidget):
         self.layout().addWidget(self.question_box)
     
     def load_chatbot(self):
-        deleteItemsOfLayout(self.layout())        
         self.init_chatbot_ui()
-        self.initial_state = False
         self.chatbotRequested.emit()
     
     def push_question(self):

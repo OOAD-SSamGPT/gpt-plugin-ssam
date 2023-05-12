@@ -97,6 +97,7 @@ class MainWindow(QMainWindow):
         self.preview_widget.set_pdf(self.pdf)
         self.pageview_widget.set_page(self.pdf[0])
         self.note_widget.load_notes(self.pdf)
+        self.chat_widget.init_initial_ui()
 
     def save_file(self):
         if self.pdf:
@@ -132,8 +133,9 @@ class MainWindow(QMainWindow):
         self.scale_widget.set_scale(scale)
     
     def load_chatbot(self):
-        self.chatbot_controler = ChatbotController(self.pdf, self.chat_widget.push_answer)
-        self.chat_widget.requested.connect(self.chatbot_controler.handle_request)
+        if self.pdf:
+            self.chatbot_controler = ChatbotController(self.pdf, self.chat_widget.push_answer)
+            self.chat_widget.requested.connect(self.chatbot_controler.handle_request)
 
 
 if __name__ == '__main__':
