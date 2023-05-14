@@ -14,6 +14,8 @@ class ChatWidget(QWidget):
         self.margin = 5
         self.answer_color = 'cyan'
         self.question_color = 'yellow'
+        self.question_box = None
+
         self.setLayout(QVBoxLayout())
         self.init_initial_ui()
         self.setMinimumWidth(self.min_width)
