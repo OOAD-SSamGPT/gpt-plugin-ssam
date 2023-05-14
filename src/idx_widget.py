@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt, pyqtSignal
 
-#위젯
+
 class IdxWidget(QWidget):
     idxChanged = pyqtSignal(int)
 
@@ -44,19 +44,19 @@ class IdxWidget(QWidget):
     def set_max_idx(self, idx):
         self.max_idx = idx
         self.max_idx_label.setText('/ ' + str(idx + 1))
-    
+
     def set_idx(self, idx):
         self.idx = idx
         self.idx_box.setText(str(idx + 1))
-    
+
     def previous_button_clicked(self):
         if self.idx > 0:
             self.idxChanged.emit(self.idx - 1)
-    
+
     def next_button_clicked(self):
         if self.idx < self.max_idx:
             self.idxChanged.emit(self.idx + 1)
-    
+
     def idx_editing_finished(self):
         try:
             idx = int(self.idx_box.text()) - 1

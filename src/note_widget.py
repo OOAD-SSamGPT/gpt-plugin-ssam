@@ -15,7 +15,7 @@ class NoteWidget(QTextEdit):
     def set_idx(self, idx):
         self.idx = idx
         self.setText(self.notes[idx])
-    
+
     def load_notes(self, pdf):
         self.pages.clear()
         self.annots.clear()
@@ -32,7 +32,7 @@ class NoteWidget(QTextEdit):
                 self.notes.append('')
                 self.annots.append(None)
         self.set_idx(0)
-    
+
     def update_note(self):
         self.notes[self.idx] = self.toPlainText()
         self.clearFocus()
@@ -48,5 +48,3 @@ class NoteWidget(QTextEdit):
                     annot.set_info(title='SsamGPT')
             elif self.annots[i]:
                 page.delete_annot(self.annots[i])
-        
-            

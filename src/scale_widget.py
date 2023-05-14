@@ -22,7 +22,8 @@ class ScaleWidget(QWidget):
         self.scale_policy_box.setFixedWidth(120)
         self.scale_policy_box.setInsertPolicy(QComboBox.NoInsert)
         self.scale_policy_box.setFocusPolicy(Qt.ClickFocus)
-        self.scale_policy_box.currentIndexChanged.connect(self.scale_policy_changed)
+        self.scale_policy_box.currentIndexChanged.connect(
+            self.scale_policy_changed)
 
         percent_label = QLabel('%')
         percent_label.setAlignment(Qt.AlignCenter)
@@ -49,19 +50,19 @@ class ScaleWidget(QWidget):
         layout.addWidget(self.scale_policy_box)
         layout.addStretch(1)
         self.setLayout(layout)
-    
+
     def set_scale(self, scale):
         self.scale = scale
         self.scale_box.setText(f"{self.scale * 100:.2f}")
-    
+
     def zoom_out_button_clicked(self):
         self.scale_policy_box.setCurrentText('사용자 설정')
         self.scaleChanged.emit(self.scale - 0.05, '사용자 설정')
-    
+
     def zoom_in_button_clicked(self):
         self.scale_policy_box.setCurrentText('사용자 설정')
         self.scaleChanged.emit(self.scale + 0.05, '사용자 설정')
-    
+
     def scale_editing_finished(self):
         self.scale_policy_box.setCurrentText('사용자 설정')
         try:
@@ -75,7 +76,7 @@ class ScaleWidget(QWidget):
         except:
             self.scale_box.setText(f"{self.scale * 100:.2f}")
         self.scale_box.clearFocus()
-    
+
     def scale_policy_changed(self):
         self.scaleChanged.emit(self.scale, self.scale_policy_box.currentText())
         self.scale_policy_box.clearFocus()
