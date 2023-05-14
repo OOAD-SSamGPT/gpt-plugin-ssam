@@ -61,8 +61,10 @@ class ChatWidget(QWidget):
         self.chatbotRequested.emit()
 
     def push_question(self):
-        self.question_box.clearFocus()
-        question = self.question_box.text()
+        question = self.question_box.text().strip()
+        if not question:
+            return
+        
         self.question_box.clear()
         self.push_dialogue(question, is_answer=False)
         self.requested.emit(question)

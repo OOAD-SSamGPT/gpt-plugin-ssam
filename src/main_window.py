@@ -115,8 +115,11 @@ class MainWindow(QMainWindow):
                 self.idx_changed(self.idx - 1)
 
     def mousePressEvent(self, event):
-        if self.pdf and event.button() == Qt.LeftButton and self.sender() != self.note_widget:
-            self.note_widget.update_note()
+        if self.pdf and event.button() == Qt.LeftButton:
+            if self.sender() != self.note_widget:
+                self.note_widget.update_note()
+            if self.sender() != self.chat_widget.question_box:
+                self.chat_widget.question_box.clearFocus()
 
     def idx_changed(self, idx):
         if self.pdf:
