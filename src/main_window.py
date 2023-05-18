@@ -12,6 +12,7 @@ from note_widget import NoteWidget
 from chat_widget import ChatWidget
 from chatbot_controller import ChatbotController
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -51,7 +52,7 @@ class MainWindow(QMainWindow):
         self.main_splitter.addWidget(self.preview_widget)
         self.main_splitter.addWidget(self.sub_splitter)
         self.main_splitter.addWidget(self.chat_widget)
-        self.main_splitter.setSizes([100, 1000, 500])
+        self.main_splitter.setSizes([100, 1000, 300])
 
         layout = QHBoxLayout()
         layout.addWidget(self.main_splitter)
@@ -114,8 +115,11 @@ class MainWindow(QMainWindow):
                 self.idx_changed(self.idx - 1)
 
     def mousePressEvent(self, event):
-        if self.pdf and event.button() == Qt.LeftButton and self.sender() != self.note_widget:
-            self.note_widget.update_note()
+        if self.pdf and event.button() == Qt.LeftButton:
+            if self.sender() != self.note_widget:
+                self.note_widget.update_note()
+            if self.sender() != self.chat_widget.question_box:
+                self.chat_widget.question_box.clearFocus()
 
     def idx_changed(self, idx):
         if self.pdf:
@@ -131,11 +135,14 @@ class MainWindow(QMainWindow):
 
     def page_resized(self, scale):
         self.scale_widget.set_scale(scale)
-    
+
     def load_chatbot(self):
         if self.pdf:
-            self.chatbot_controler = ChatbotController(self.pdf, self.chat_widget.push_answer)
-            self.chat_widget.requested.connect(self.chatbot_controler.handle_request)
+            self.chat_widget.init_chatbot_ui()
+            self.chatbot_controler = ChatbotController(
+                self.pdf, self.chat_widget.push_answer)
+            self.chat_widget.requested.connect(
+                self.chatbot_controler.handle_request)
 
 
 if __name__ == '__main__':
