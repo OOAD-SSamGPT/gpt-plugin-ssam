@@ -15,6 +15,7 @@ import textract
 import sys
 import json
 import urllib.request
+load_dotenv()
 
 
 class ChatbotController:
@@ -102,8 +103,11 @@ class HandleRequestThread(QThread):
         self.finished.emit(result)
 
     def translate(self, question, src, tar) -> str:
-        client_id = "5EnH0B4Nm1uSYVsKPt4v"  # 개발자센터에서 발급받은 Client ID 값
-        client_secret = "xXeIiZl829"  # 개발자센터에서 발급받은 Client Secret 값
+        # 개발자센터에서 발급받은 Client ID 값
+        client_id = os.environ.get('PAPAGO_CLIENT')
+        # 개발자센터에서 발급받은 Client Secret 값
+        client_secret = os.environ.get('PAPAGO_SECRET')
+
         encText = urllib.parse.quote(question)
         data = f"source={src}&target={tar}&text=" + encText
         url = "https://openapi.naver.com/v1/papago/n2mt"
