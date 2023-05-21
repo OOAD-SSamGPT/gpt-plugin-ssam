@@ -7,6 +7,9 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.llms import OpenAI
 from transformers import GPT2TokenizerFast
 from dotenv import load_dotenv
+from langchain.document_loaders import PyPDFLoader
+
+import textract
 
 
 class ChatbotController:
@@ -41,17 +44,31 @@ class InitChatbotThread(QThread):
         load_dotenv()
         os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
 
-        text = ''
-        for page in self.controller.pdf:
-            text += page.get_text(sort=True) + '\n'
+        loader = PyPDFLoader("./assets/test.pdf")
+        pages = loader.load_and_split()
+        chunks = pages
+        # doc = textract.process("./assets/test.pdf")
+        # with open('test.txt', 'w') as f:
+        #     f.write(doc.decode('utf-8'))
 
-        tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=512,
-            chunk_overlap=24,
-            length_function=lambda x: len(tokenizer.encode(x)),
-        )
-        chunks = text_splitter.create_documents([text])
+        # with open('test.txt', 'r') as f:
+        #     text = f.read()
+
+        # for i in pages:
+        #     print(i)
+        # # text = ''
+        # # for page in self.controller.pdf:
+        # #     text += page.get_text(sort=True) + '\n'
+
+        # # Step 2: Save to .txt and reopen (helps prevent issues)
+
+        # tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
+        # text_splitter = RecursiveCharacterTextSplitter(
+        #     chunk_size=512,
+        #     chunk_overlap=24,
+        #     length_function=lambda x: len(tokenizer.encode(x)),
+        # )
+        # chunks = text_splitter.create_documents([text])
         embeddings = OpenAIEmbeddings()
 
         db = FAISS.from_documents(chunks, embeddings)
