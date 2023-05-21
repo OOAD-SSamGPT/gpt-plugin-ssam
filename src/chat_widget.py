@@ -15,6 +15,8 @@ class ChatWidget(QWidget):
         self.margin = 5
         self.answer_color = 'cyan'
         self.question_color = 'yellow'
+        self.question_box = None
+
         self.setLayout(QVBoxLayout())
         self.init_initial_ui()
         self.setMinimumWidth(self.min_width)
@@ -27,6 +29,7 @@ class ChatWidget(QWidget):
         self.initial_state = True
 
         chatbot_button = QPushButton()
+        chatbot_button.setFocusPolicy(Qt.NoFocus)
         chatbot_button.setText('Load Chatbot')
         chatbot_button.clicked.connect(self.load_chatbot)
         self.layout().addWidget(chatbot_button)
@@ -48,6 +51,8 @@ class ChatWidget(QWidget):
         self.history_box.setWidgetResizable(True)
         self.history_box.setFocusPolicy(Qt.NoFocus)
         self.history_box.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.history_box.verticalScrollBar().rangeChanged.connect(
+            lambda: self.history_box.verticalScrollBar().setValue(self.history_box.verticalScrollBar().maximum()))
         self.question_box = QLineEdit()
         self.question_box.returnPressed.connect(self.push_question)
 
@@ -75,6 +80,7 @@ class ChatWidget(QWidget):
         self.answered = False
         self.question_box.clearFocus()
         question = self.question_box.text()
+
         self.question_box.clear()
         self.push_dialogue(question, is_answer=False)
         self.requested.emit(question)

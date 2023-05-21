@@ -52,7 +52,7 @@ class MainWindow(QMainWindow):
         self.main_splitter.addWidget(self.preview_widget)
         self.main_splitter.addWidget(self.sub_splitter)
         self.main_splitter.addWidget(self.chat_widget)
-        self.main_splitter.setSizes([100, 1000, 500])
+        self.main_splitter.setSizes([100, 1000, 300])
 
         layout = QHBoxLayout()
         layout.addWidget(self.main_splitter)
@@ -114,8 +114,11 @@ class MainWindow(QMainWindow):
                 self.idx_changed(self.idx - 1)
 
     def mousePressEvent(self, event):
-        if self.pdf and event.button() == Qt.LeftButton and self.sender() != self.note_widget:
-            self.note_widget.update_note()
+        if self.pdf and event.button() == Qt.LeftButton:
+            if self.sender() != self.note_widget:
+                self.note_widget.update_note()
+            if self.sender() != self.chat_widget.question_box:
+                self.chat_widget.question_box.clearFocus()
 
     def idx_changed(self, idx):
         if self.pdf:
