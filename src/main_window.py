@@ -137,7 +137,7 @@ class MainWindow(QMainWindow):
 
     def load_chatbot(self):
         if self.pdf:
-
+            self.chat_widget.init_initial_ui()
             self.chatbot_controler = ChatbotController(
                 self.pdf, self.chat_widget)
             self.chat_widget.requested.connect(

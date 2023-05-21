@@ -11,6 +11,11 @@ from langchain.document_loaders import PyPDFLoader
 
 import textract
 
+# for papago
+import sys
+import json
+import urllib.request
+
 
 class ChatbotController:
     def __init__(self, pdf, chat_widget):
@@ -85,8 +90,33 @@ class HandleRequestThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
+        self.controller.question = self.translate(
+            self.controller.question, "ko", "en")
         result = self.controller.chat_bot(
             {"question": self.controller.question, "chat_history": self.controller.chat_history})
+        print(result)
+        result = self.translate(result['answer'], "en", "ko")
+        print(result)
         self.controller.chat_history.append(
-            (self.controller.question, result['answer']))
-        self.finished.emit(result['answer'])
+            (self.controller.question, result))
+        self.finished.emit(result)
+
+    def translate(self, question, src, tar) -> str:
+        client_id = "5EnH0B4Nm1uSYVsKPt4v"  # 개발자센터에서 발급받은 Client ID 값
+        client_secret = "xXeIiZl829"  # 개발자센터에서 발급받은 Client Secret 값
+        encText = urllib.parse.quote(question)
+        data = f"source={src}&target={tar}&text=" + encText
+        url = "https://openapi.naver.com/v1/papago/n2mt"
+        request = urllib.request.Request(url)
+        request.add_header("X-Naver-Client-Id", client_id)
+        request.add_header("X-Naver-Client-Secret", client_secret)
+        response = urllib.request.urlopen(request, data=data.encode("utf-8"))
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read()
+            json_data = json.loads(response_body.decode('utf-8'))
+            print(json_data['message']['result']['translatedText'])
+        else:
+            print("Error Code:" + rescode)
+
+        return json_data['message']['result']['translatedText']

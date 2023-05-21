@@ -18,13 +18,11 @@ class ChatWidget(QWidget):
         self.question_box = None
 
         self.setLayout(QVBoxLayout())
-        self.init_initial_ui()
         self.setMinimumWidth(self.min_width)
 
     def init_initial_ui(self):
         if self.initial_state:
             return
-
         deleteItemsOfLayout(self.layout())
         self.initial_state = True
 
