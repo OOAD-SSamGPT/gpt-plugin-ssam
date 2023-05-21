@@ -12,6 +12,7 @@ from note_widget import NoteWidget
 from chat_widget import ChatWidget
 from chatbot_controller import ChatbotController
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -85,7 +86,6 @@ class MainWindow(QMainWindow):
         tool_bar.setFloatable(False)
         self.addToolBar(tool_bar)
 
-    # events for menu bar
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self.window(), 'Open file', '', 'PDF Files (*.pdf)')
@@ -131,11 +131,13 @@ class MainWindow(QMainWindow):
 
     def page_resized(self, scale):
         self.scale_widget.set_scale(scale)
-    
+
     def load_chatbot(self):
         if self.pdf:
-            self.chatbot_controler = ChatbotController(self.pdf, self.chat_widget.push_answer)
-            self.chat_widget.requested.connect(self.chatbot_controler.handle_request)
+            self.chatbot_controler = ChatbotController(
+                self.pdf, self.chat_widget)
+            self.chat_widget.requested.connect(
+                self.chatbot_controler.handle_request)
 
 
 if __name__ == '__main__':
