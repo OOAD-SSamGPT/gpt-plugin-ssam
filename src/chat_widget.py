@@ -9,6 +9,7 @@ class ChatWidget(QWidget):
     def __init__(self):
         super().__init__()
         self.initial_state = False
+        self.answered = True
         self.min_width = 0
         self.space = 30
         self.margin = 5
@@ -32,6 +33,15 @@ class ChatWidget(QWidget):
         chatbot_button.setText('Load Chatbot')
         chatbot_button.clicked.connect(self.load_chatbot)
         self.layout().addWidget(chatbot_button)
+
+    def init_loading_ui(self):
+        deleteItemsOfLayout(self.layout())
+        self.initial_state = False
+
+        loading_message = QLabel()
+        loading_message.setText('Now Loading...')
+        loading_message.setAlignment(Qt.AlignCenter)
+        self.layout().addWidget(loading_message)
 
     def init_chatbot_ui(self):
         deleteItemsOfLayout(self.layout())
@@ -60,18 +70,23 @@ class ChatWidget(QWidget):
         self.layout().addWidget(self.question_box)
 
     def load_chatbot(self):
+        self.init_loading_ui()
         self.chatbotRequested.emit()
 
     def push_question(self):
-        question = self.question_box.text().strip()
-        if not question:
+        if not self.answered:
             return
-        
+
+        self.answered = False
+        self.question_box.clearFocus()
+        question = self.question_box.text()
+
         self.question_box.clear()
         self.push_dialogue(question, is_answer=False)
         self.requested.emit(question)
 
     def push_answer(self, answer):
+        self.answered = True
         self.push_dialogue(answer)
 
     def push_dialogue(self, text, is_answer=True):

@@ -86,7 +86,6 @@ class MainWindow(QMainWindow):
         tool_bar.setFloatable(False)
         self.addToolBar(tool_bar)
 
-    # events for menu bar
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self.window(), 'Open file', '', 'PDF Files (*.pdf)')
@@ -138,9 +137,8 @@ class MainWindow(QMainWindow):
 
     def load_chatbot(self):
         if self.pdf:
-            self.chat_widget.init_chatbot_ui()
             self.chatbot_controler = ChatbotController(
-                self.pdf, self.chat_widget.push_answer)
+                self.pdf, self.chat_widget)
             self.chat_widget.requested.connect(
                 self.chatbot_controler.handle_request)
 
