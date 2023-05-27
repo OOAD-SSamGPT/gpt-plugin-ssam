@@ -7,6 +7,15 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.llms import OpenAI
 from transformers import GPT2TokenizerFast
 from dotenv import load_dotenv
+from langchain.document_loaders import PyPDFLoader
+
+import textract
+
+# for papago
+import sys
+import json
+import urllib.request
+load_dotenv()
 
 
 class ChatbotController:
@@ -41,17 +50,31 @@ class InitChatbotThread(QThread):
         load_dotenv()
         os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
 
-        text = ''
-        for page in self.controller.pdf:
-            text += page.get_text(sort=True) + '\n'
+        loader = PyPDFLoader("./assets/test.pdf")
+        pages = loader.load_and_split()
+        chunks = pages
+        # doc = textract.process("./assets/test.pdf")
+        # with open('test.txt', 'w') as f:
+        #     f.write(doc.decode('utf-8'))
 
-        tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=512,
-            chunk_overlap=24,
-            length_function=lambda x: len(tokenizer.encode(x)),
-        )
-        chunks = text_splitter.create_documents([text])
+        # with open('test.txt', 'r') as f:
+        #     text = f.read()
+
+        # for i in pages:
+        #     print(i)
+        # # text = ''
+        # # for page in self.controller.pdf:
+        # #     text += page.get_text(sort=True) + '\n'
+
+        # # Step 2: Save to .txt and reopen (helps prevent issues)
+
+        # tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
+        # text_splitter = RecursiveCharacterTextSplitter(
+        #     chunk_size=512,
+        #     chunk_overlap=24,
+        #     length_function=lambda x: len(tokenizer.encode(x)),
+        # )
+        # chunks = text_splitter.create_documents([text])
         embeddings = OpenAIEmbeddings()
 
         db = FAISS.from_documents(chunks, embeddings)
@@ -68,8 +91,36 @@ class HandleRequestThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
+        self.controller.question = self.translate(
+            self.controller.question, "ko", "en")
         result = self.controller.chat_bot(
             {"question": self.controller.question, "chat_history": self.controller.chat_history})
+        print(result)
+        result = self.translate(result['answer'], "en", "ko")
+        print(result)
         self.controller.chat_history.append(
-            (self.controller.question, result['answer']))
-        self.finished.emit(result['answer'])
+            (self.controller.question, result))
+        self.finished.emit(result)
+
+    def translate(self, question, src, tar) -> str:
+        # 개발자센터에서 발급받은 Client ID 값
+        client_id = os.environ.get('PAPAGO_CLIENT')
+        # 개발자센터에서 발급받은 Client Secret 값
+        client_secret = os.environ.get('PAPAGO_SECRET')
+
+        encText = urllib.parse.quote(question)
+        data = f"source={src}&target={tar}&text=" + encText
+        url = "https://openapi.naver.com/v1/papago/n2mt"
+        request = urllib.request.Request(url)
+        request.add_header("X-Naver-Client-Id", client_id)
+        request.add_header("X-Naver-Client-Secret", client_secret)
+        response = urllib.request.urlopen(request, data=data.encode("utf-8"))
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read()
+            json_data = json.loads(response_body.decode('utf-8'))
+            print(json_data['message']['result']['translatedText'])
+        else:
+            print("Error Code:" + rescode)
+
+        return json_data['message']['result']['translatedText']
