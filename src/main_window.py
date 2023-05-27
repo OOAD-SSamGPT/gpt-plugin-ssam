@@ -20,6 +20,7 @@ class MainWindow(QMainWindow):
         self.pdf = None
         self.idx = 0
         self.max_idx = 0
+        self.file_path = ''
         self.init_ui()
         self.show()
 
@@ -89,9 +90,11 @@ class MainWindow(QMainWindow):
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self.window(), 'Open file', '', 'PDF Files (*.pdf)')
+        self.file_path = file_path
         self.pdf = fitz.open(file_path)
         self.idx = 0
         self.max_idx = self.pdf.page_count - 1
+
         self.idx_widget.set_idx(self.idx)
         self.idx_widget.set_max_idx(self.max_idx)
         self.preview_widget.set_pdf(self.pdf)
@@ -138,7 +141,7 @@ class MainWindow(QMainWindow):
     def load_chatbot(self):
         if self.pdf:
             self.chatbot_controler = ChatbotController(
-                self.pdf, self.chat_widget)
+                self.file_path, self.chat_widget)
             self.chat_widget.requested.connect(
                 self.chatbot_controler.handle_request)
 
