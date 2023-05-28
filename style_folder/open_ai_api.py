@@ -6,7 +6,7 @@ import openai
 
 class GptGenerator():
     def __init__(self):
-        openai.api_key = "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"
+        openai.api_key = os.environ.get('API_KEY') # API KEY
         self.model_engine = "gpt-3.5-turbo"
         self.data = []
         
