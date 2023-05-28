@@ -67,16 +67,26 @@ class HandleRequestThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
-
+        #
         self.controller.question = self.translate(
             self.controller.question, self.controller.language, "en")
         result = self.controller.chat_bot(
             {"question": self.controller.question, "chat_history": self.controller.chat_history})
         result = self.translate(
             result['answer'], "en", self.controller.language)
-
         self.controller.chat_history.append(
             (self.controller.question, result))
+
+        # added
+        additional_ques = self.controller.chat_bot(
+            {"question": f"Could you recommend some additional question about {self.controller.question}",
+             "chat_history": self.controller.chat_history})
+        additional_ques = self.translate(
+            additional_ques['answer'], "en", self.controller.language)
+        self.controller.chat_history.append(
+            (self.controller.question, additional_ques))
+        print(additional_ques)
+
         # result = f"proper answer with\nadditional_question : {self.controller.addl_q}\nlanguage : {self.controller.language}"
         self.finished.emit(result)
 
