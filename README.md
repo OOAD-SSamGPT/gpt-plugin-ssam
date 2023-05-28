@@ -1,20 +1,5 @@
-# GPT plugin
+# Style_folder안에 있는 파일들임
 
-pdf 파일로 질문하고
-gpt 답변 받자
-
-### Prerequisite
-PyMuPDF  
-```sh
-pip install PyMuPDF
-```
-
-PyQt5  
-```sh
-pip install PyQt5
-```
-
-For chatPDF
-```bash
-pip install -q langchain==0.0.150 pypdf pandas matplotlib tiktoken textract transformers openai faiss-cpu
-```
+main이라고 있는 파이썬 파일 두 개 있는데 
+하나는 답변 스타일 설정이고  
+하나는 추가 질문 생성 파일임 
