@@ -18,6 +18,7 @@ class ChatbotController:
         self.file_path = file_path
         self.chat_widget = chat_widget
         self.question = ''
+        self.addl_q = False
         self.chat_history = []
 
         self.init_chatbot_thread = InitChatbotThread(self)
@@ -29,8 +30,9 @@ class ChatbotController:
         self.handle_request_thread.finished.connect(
             self.chat_widget.push_answer)
 
-    def handle_request(self, question):
+    def handle_request(self, question, addl_q):
         self.question = question
+        self.addl_q = addl_q
         self.handle_request_thread.start()
 
 
@@ -42,16 +44,17 @@ class InitChatbotThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
-        load_dotenv()
-        os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
+        pass
+        # load_dotenv()
+        # os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
 
-        loader = PyPDFLoader(self.controller.file_path)
-        chunks = loader.load_and_split()
-        embeddings = OpenAIEmbeddings()
-        db = FAISS.from_documents(chunks, embeddings)
+        # loader = PyPDFLoader(self.controller.file_path)
+        # chunks = loader.load_and_split()
+        # embeddings = OpenAIEmbeddings()
+        # db = FAISS.from_documents(chunks, embeddings)
 
-        self.controller.chat_bot = ConversationalRetrievalChain.from_llm(
-            OpenAI(temperature=0.1), db.as_retriever())
+        # self.controller.chat_bot = ConversationalRetrievalChain.from_llm(
+        #     OpenAI(temperature=0.1), db.as_retriever())
         self.finished.emit()
 
 
@@ -63,14 +66,15 @@ class HandleRequestThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
-        self.controller.question = self.translate(
-            self.controller.question, "ko", "en")
-        result = self.controller.chat_bot(
-            {"question": self.controller.question, "chat_history": self.controller.chat_history})
-        result = self.translate(result['answer'], "en", "ko")
+        # self.controller.question = self.translate(
+        #     self.controller.question, "ko", "en")
+        # result = self.controller.chat_bot(
+        #     {"question": self.controller.question, "chat_history": self.controller.chat_history})
+        # result = self.translate(result['answer'], "en", "ko")
 
-        self.controller.chat_history.append(
-            (self.controller.question, result))
+        # self.controller.chat_history.append(
+        #     (self.controller.question, result))
+        result = f"proper answer with additional_question {self.controller.addl_q}"
         self.finished.emit(result)
 
     def translate(self, question, src, tar) -> str:

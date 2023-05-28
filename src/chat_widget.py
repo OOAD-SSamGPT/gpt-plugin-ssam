@@ -3,13 +3,14 @@ from PyQt5.QtCore import *
 
 
 class ChatWidget(QWidget):
-    requested = pyqtSignal(str)
+    requested = pyqtSignal(str, bool)
     chatbotRequested = pyqtSignal()
 
     def __init__(self):
         super().__init__()
         self.initial_state = False
         self.answered = True
+        self.addl_q = False
         self.min_width = 0
         self.space = 30
         self.margin = 5
@@ -45,6 +46,9 @@ class ChatWidget(QWidget):
         deleteItemsOfLayout(self.layout())
         self.initial_state = False
 
+        addl_q_box = QCheckBox('Create Additional Question')
+        addl_q_box.stateChanged.connect(self.addl_q_setting_changed)
+
         self.history_box = QScrollArea()
         self.history_box.setWidgetResizable(True)
         self.history_box.setFocusPolicy(Qt.NoFocus)
@@ -64,6 +68,7 @@ class ChatWidget(QWidget):
         self.history_box.setWidget(widget)
 
         self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().addWidget(addl_q_box)
         self.layout().addWidget(self.history_box)
         self.layout().addWidget(self.question_box)
 
@@ -81,7 +86,7 @@ class ChatWidget(QWidget):
 
         self.question_box.clear()
         self.push_dialogue(question, is_answer=False)
-        self.requested.emit(question)
+        self.requested.emit(question, self.addl_q)
 
     def push_answer(self, answer):
         self.answered = True
@@ -111,6 +116,12 @@ class ChatWidget(QWidget):
             layout.addStretch(1)
             layout.addWidget(dialogue)
         self.history_layout.addLayout(layout)
+    
+    def addl_q_setting_changed(self, state):
+        if state == 2:
+            self.addl_q = True
+        else:
+            self.addl_q = False
 
 
 def deleteItemsOfLayout(layout):
