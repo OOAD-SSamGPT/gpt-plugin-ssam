@@ -46,17 +46,16 @@ class InitChatbotThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
-        pass
-        # load_dotenv()
-        # os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
+        load_dotenv()
+        os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
 
-        # loader = PyPDFLoader(self.controller.file_path)
-        # chunks = loader.load_and_split()
-        # embeddings = OpenAIEmbeddings()
-        # db = FAISS.from_documents(chunks, embeddings)
+        loader = PyPDFLoader(self.controller.file_path)
+        chunks = loader.load_and_split()
+        embeddings = OpenAIEmbeddings()
+        db = FAISS.from_documents(chunks, embeddings)
 
-        # self.controller.chat_bot = ConversationalRetrievalChain.from_llm(
-        #     OpenAI(temperature=0.1), db.as_retriever())
+        self.controller.chat_bot = ConversationalRetrievalChain.from_llm(
+            OpenAI(temperature=0.1), db.as_retriever())
         self.finished.emit()
 
 
@@ -68,18 +67,22 @@ class HandleRequestThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
-        # self.controller.question = self.translate(
-        #     self.controller.question, "ko", "en")
-        # result = self.controller.chat_bot(
-        #     {"question": self.controller.question, "chat_history": self.controller.chat_history})
-        # result = self.translate(result['answer'], "en", "ko")
 
-        # self.controller.chat_history.append(
-        #     (self.controller.question, result))
-        result = f"proper answer with\nadditional_question : {self.controller.addl_q}\nlanguage : {self.controller.language}"
+        self.controller.question = self.translate(
+            self.controller.question, self.controller.language, "en")
+        result = self.controller.chat_bot(
+            {"question": self.controller.question, "chat_history": self.controller.chat_history})
+        result = self.translate(
+            result['answer'], "en", self.controller.language)
+
+        self.controller.chat_history.append(
+            (self.controller.question, result))
+        # result = f"proper answer with\nadditional_question : {self.controller.addl_q}\nlanguage : {self.controller.language}"
         self.finished.emit(result)
 
     def translate(self, question, src, tar) -> str:
+        if src == 'en' and tar == 'en':
+            return question
         # 개발자센터에서 발급받은 Client ID 값
         client_id = os.environ.get('PAPAGO_CLIENT')
         # 개발자센터에서 발급받은 Client Secret 값
