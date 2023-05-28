@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 
 
 class ChatWidget(QWidget):
-    requested = pyqtSignal(str, bool)
+    requested = pyqtSignal(str, bool, str)
     chatbotRequested = pyqtSignal()
 
     def __init__(self):
@@ -11,6 +11,7 @@ class ChatWidget(QWidget):
         self.initial_state = False
         self.answered = True
         self.addl_q = False
+        self.language = 'ko'
         self.min_width = 0
         self.space = 30
         self.margin = 5
@@ -49,6 +50,17 @@ class ChatWidget(QWidget):
         addl_q_box = QCheckBox('Create Additional Question')
         addl_q_box.stateChanged.connect(self.addl_q_setting_changed)
 
+        language_label = QLabel('Language : ')
+        lang_sel_box = QComboBox()
+        lang_sel_box.addItems(['ko', 'en', 'ja', 'zh-CN'])
+        lang_sel_box.setFocusPolicy(Qt.ClickFocus)
+        lang_sel_box.currentIndexChanged.connect(self.lang_changed)
+        lang_layout = QHBoxLayout()
+        lang_layout.addWidget(language_label)
+        lang_layout.addWidget(lang_sel_box)
+        lang_widget = QWidget()
+        lang_widget.setLayout(lang_layout)
+
         self.history_box = QScrollArea()
         self.history_box.setWidgetResizable(True)
         self.history_box.setFocusPolicy(Qt.NoFocus)
@@ -69,6 +81,7 @@ class ChatWidget(QWidget):
 
         self.layout().setContentsMargins(0, 0, 0, 0)
         self.layout().addWidget(addl_q_box)
+        self.layout().addWidget(lang_widget)
         self.layout().addWidget(self.history_box)
         self.layout().addWidget(self.question_box)
 
@@ -86,7 +99,7 @@ class ChatWidget(QWidget):
 
         self.question_box.clear()
         self.push_dialogue(question, is_answer=False)
-        self.requested.emit(question, self.addl_q)
+        self.requested.emit(question, self.addl_q, self.language)
 
     def push_answer(self, answer):
         self.answered = True
@@ -122,6 +135,9 @@ class ChatWidget(QWidget):
             self.addl_q = True
         else:
             self.addl_q = False
+    
+    def lang_changed(self):
+        self.language = self.sender().currentText()
 
 
 def deleteItemsOfLayout(layout):
