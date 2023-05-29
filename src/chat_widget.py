@@ -8,10 +8,6 @@ class ChatWidget(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.initial_state = False
-        self.answered = True
-        self.addl_q = False
-        self.language = 'ko'
         self.min_width = 0
         self.space = 30
         self.margin = 5
@@ -22,22 +18,21 @@ class ChatWidget(QWidget):
 
         self.setLayout(QVBoxLayout())
         self.setMinimumWidth(self.min_width)
+    
+    def set_handler(self, handler):
+        self.handler = handler
 
     def init_initial_ui(self):
-        if self.initial_state:
-            return
         deleteItemsOfLayout(self.layout())
-        self.initial_state = True
 
         chatbot_button = QPushButton()
         chatbot_button.setFocusPolicy(Qt.NoFocus)
         chatbot_button.setText('Load Chatbot')
-        chatbot_button.clicked.connect(self.load_chatbot)
+        chatbot_button.clicked.connect(self.handler.load_chatbot)
         self.layout().addWidget(chatbot_button)
 
     def init_loading_ui(self):
         deleteItemsOfLayout(self.layout())
-        self.initial_state = False
 
         loading_message = QLabel()
         loading_message.setText('Now Loading...')
@@ -46,7 +41,6 @@ class ChatWidget(QWidget):
 
     def init_chatbot_ui(self):
         deleteItemsOfLayout(self.layout())
-        self.initial_state = False
 
         addl_q_box = QCheckBox('Create Additional Question')
         addl_q_box.stateChanged.connect(self.addl_q_setting_changed)
@@ -69,7 +63,7 @@ class ChatWidget(QWidget):
         self.history_box.verticalScrollBar().rangeChanged.connect(
             lambda: self.history_box.verticalScrollBar().setValue(self.history_box.verticalScrollBar().maximum()))
         self.question_box = QLineEdit()
-        self.question_box.returnPressed.connect(self.push_question)
+        self.question_box.returnPressed.connect(self.handler.push_question)
 
         self.history_layout = QVBoxLayout()
         self.history_layout.addStretch(1)
@@ -86,26 +80,14 @@ class ChatWidget(QWidget):
         self.layout().addWidget(self.history_box)
         self.layout().addWidget(self.question_box)
 
-    def load_chatbot(self):
-        self.init_loading_ui()
-        self.chatbotRequested.emit()
-
-    def push_question(self):
-        if not self.answered:
-            return
-
-        self.answered = False
+    def get_question(self):
         self.question_box.clearFocus()
         question = self.question_box.text()
-
         self.question_box.clear()
-        self.push_dialogue(question, is_answer=False)
-        self.requested.emit(question, self.addl_q, self.language)
-
-    def push_answer(self, result):
-        self.answered = True
-        self.push_dialogue(result[0])
-        for i, addl_q in enumerate(result[1:]):
+        return question
+        
+    def set_addl_q(self, addl_ques):
+        for i, addl_q in enumerate(addl_ques):
             self.addl_q_boxes[i].setText(addl_q)
 
     def push_dialogue(self, text, is_answer=True):
@@ -134,36 +116,26 @@ class ChatWidget(QWidget):
         self.history_layout.addLayout(layout)
     
     def addl_q_clicked(self):
-        if not self.answered:
-            return
-        
-        self.answered = False
-        question = self.sender().text()
-        if question:
-            self.push_dialogue(question, is_answer=False)
-            self.requested.emit(question, self.addl_q, self.language)
+        self.handler.addl_q_requested(self.sender().text())
     
     def addl_q_setting_changed(self, state):
-        if not self.answered:
-            return
-        
-        if state == 2:
-            self.addl_q = True
-            for i in range(2, 5):
-                q_box = QPushButton()
-                q_box.setStyleSheet("text-align: left;")
-                q_box.clicked.connect(self.addl_q_clicked)
-                self.addl_q_boxes.append(q_box)
-                self.layout().insertWidget(i, q_box)
-        else:
-            self.addl_q = False
-            for q_box in self.addl_q_boxes:
-                q_box.setParent(None)
-                self.addl_q_boxes = []
+        self.handler.set_addl_q_setting(state)
+    
+    def create_addl_q_boxes(self):
+        for i in range(2, 5):
+            q_box = QPushButton()
+            q_box.setStyleSheet("text-align: left;")
+            q_box.clicked.connect(self.addl_q_clicked)
+            self.addl_q_boxes.append(q_box)
+            self.layout().insertWidget(i, q_box)
+    
+    def destroy_addl_q_boxes(self):
+        for q_box in self.addl_q_boxes:
+            q_box.setParent(None)
+            self.addl_q_boxes = []
     
     def lang_changed(self):
-        self.language = self.sender().currentText()
-
+        self.handler.set_language(self.sender().currentText())
 
 def deleteItemsOfLayout(layout):
     if layout is not None:

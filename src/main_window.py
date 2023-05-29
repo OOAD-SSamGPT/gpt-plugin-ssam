@@ -9,7 +9,7 @@ from idx_widget import IdxWidget
 from scale_widget import ScaleWidget
 from note_widget import NoteWidget
 from chat_widget import ChatWidget
-from event_handler import EventHandler
+from main_controller import MainController
 
 
 class MainWindow(QMainWindow):
@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
         widgets['scale'] = self.scale_widget
 
         actions = self.init_menu_bar()
-        self.event_handler = EventHandler(self.window(), widgets, actions)
+        self.main_controller = MainController(self.window(), widgets, actions)
 
         self.init_tool_bar()
         self.sub_splitter = QSplitter()
@@ -91,10 +91,10 @@ class MainWindow(QMainWindow):
 
     # main events
     def keyPressEvent(self, event):
-        self.event_handler.key_pressed(event.key())
+        self.main_controller.key_pressed(event.key())
 
     def mousePressEvent(self, event):
-        self.event_handler.mouse_pressed(event.button(), self.sender())
+        self.main_controller.mouse_pressed(event.button(), self.sender())
 
 
 if __name__ == '__main__':
