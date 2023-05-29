@@ -41,11 +41,12 @@ class ChatHandler:
         self.chat_widget.push_dialogue(result[0])        
 
     def addl_q_requested(self, question):
+        print(question)
         if not self.answered:
             return
 
-        self.answered = False
         if question:
+            self.answered = False
             self.chat_widget.push_dialogue(question, is_answer=False)
             self.chat_widget.requested.emit(question, self.addl_q, self.language)
     

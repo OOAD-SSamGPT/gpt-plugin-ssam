@@ -71,7 +71,7 @@ class HandleRequestThread(QThread):
             self.controller.question, self.controller.language, "en")
         result = self.controller.chat_bot(
             {"question": self.controller.question, "chat_history": self.controller.chat_history})
-        self.controller.chat_history.append(self.controller.question, result['answer'])
+        self.controller.chat_history.append((self.controller.question, result['answer']))
         answer = self.translate(
             result['answer'], "en", self.controller.language)
         result = [answer]

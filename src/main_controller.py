@@ -64,6 +64,9 @@ class MainController:
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self.window, 'Open file', '', 'PDF Files (*.pdf)')
+        if not file_path:
+            return
+        
         self.file_path = file_path
         self.pdf = fitz.open(file_path)
         self.idx = 0
