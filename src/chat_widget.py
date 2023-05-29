@@ -18,6 +18,7 @@ class ChatWidget(QWidget):
         self.answer_color = 'cyan'
         self.question_color = 'yellow'
         self.question_box = None
+        self.addl_q_boxes = []
 
         self.setLayout(QVBoxLayout())
         self.setMinimumWidth(self.min_width)
@@ -101,9 +102,11 @@ class ChatWidget(QWidget):
         self.push_dialogue(question, is_answer=False)
         self.requested.emit(question, self.addl_q, self.language)
 
-    def push_answer(self, answer):
+    def push_answer(self, result):
         self.answered = True
-        self.push_dialogue(answer)
+        self.push_dialogue(result[0])
+        for i, addl_q in enumerate(result[1:]):
+            self.addl_q_boxes[i].setText(addl_q)
 
     def push_dialogue(self, text, is_answer=True):
         dialogue = QLabel()
@@ -130,11 +133,33 @@ class ChatWidget(QWidget):
             layout.addWidget(dialogue)
         self.history_layout.addLayout(layout)
     
+    def addl_q_clicked(self):
+        if not self.answered:
+            return
+        
+        self.answered = False
+        question = self.sender().text()
+        if question:
+            self.push_dialogue(question, is_answer=False)
+            self.requested.emit(question, self.addl_q, self.language)
+    
     def addl_q_setting_changed(self, state):
+        if not self.answered:
+            return
+        
         if state == 2:
             self.addl_q = True
+            for i in range(2, 5):
+                q_box = QPushButton()
+                q_box.setStyleSheet("text-align: left;")
+                q_box.clicked.connect(self.addl_q_clicked)
+                self.addl_q_boxes.append(q_box)
+                self.layout().insertWidget(i, q_box)
         else:
             self.addl_q = False
+            for q_box in self.addl_q_boxes:
+                q_box.setParent(None)
+                self.addl_q_boxes = []
     
     def lang_changed(self):
         self.language = self.sender().currentText()

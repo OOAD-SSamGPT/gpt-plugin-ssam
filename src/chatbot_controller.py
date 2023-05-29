@@ -60,33 +60,42 @@ class InitChatbotThread(QThread):
 
 
 class HandleRequestThread(QThread):
-    finished = pyqtSignal(str)
+    finished = pyqtSignal(list)
 
     def __init__(self, chatbot_controller):
         super().__init__()
         self.controller = chatbot_controller
 
     def run(self):
-        #
+        
         self.controller.question = self.translate(
             self.controller.question, self.controller.language, "en")
         result = self.controller.chat_bot(
             {"question": self.controller.question, "chat_history": self.controller.chat_history})
-        result = self.translate(
+        answer = self.translate(
             result['answer'], "en", self.controller.language)
         self.controller.chat_history.append(
-            (self.controller.question, result))
+            (self.controller.question, answer))
+        result = [answer]
 
         # added
-        additional_ques = self.controller.chat_bot(
-            {"question": f"Could you recommend some additional question about {self.controller.question}",
-             "chat_history": self.controller.chat_history})
-        additional_ques = self.translate(
-            additional_ques['answer'], "en", self.controller.language)
-        self.controller.chat_history.append(
-            (self.controller.question, additional_ques))
-        print(additional_ques)
-
+        if self.controller.addl_q:
+            additional_ques = self.controller.chat_bot(
+                {"question": f"recommend three additional question about \"{self.controller.question}\"",
+                "chat_history": self.controller.chat_history})
+            additional_ques = self.translate(
+                additional_ques['answer'], "en", self.controller.language)
+            self.controller.chat_history.append(
+                (self.controller.question, additional_ques))
+            print(additional_ques)
+            if ':' in additional_ques:
+                addl_ques = additional_ques.split(':')[1].strip()
+            else:
+                addl_ques = additional_ques.strip()
+            addl_ques = list(map(lambda x: x.strip() + '?', addl_ques.split('?')[:3]))
+            print(addl_ques)
+            result.extend(addl_ques)
+        
         # result = f"proper answer with\nadditional_question : {self.controller.addl_q}\nlanguage : {self.controller.language}"
         self.finished.emit(result)
 
