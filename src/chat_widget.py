@@ -3,19 +3,22 @@ from PyQt5.QtCore import *
 
 
 class ChatWidget(QWidget):
-    requested = pyqtSignal(str)
+    requested = pyqtSignal(str, bool, str)
     chatbotRequested = pyqtSignal()
 
     def __init__(self):
         super().__init__()
         self.initial_state = False
         self.answered = True
+        self.addl_q = False
+        self.language = 'ko'
         self.min_width = 0
         self.space = 30
         self.margin = 5
         self.answer_color = 'cyan'
         self.question_color = 'yellow'
         self.question_box = None
+        self.addl_q_boxes = []
 
         self.setLayout(QVBoxLayout())
         self.setMinimumWidth(self.min_width)
@@ -45,6 +48,20 @@ class ChatWidget(QWidget):
         deleteItemsOfLayout(self.layout())
         self.initial_state = False
 
+        addl_q_box = QCheckBox('Create Additional Question')
+        addl_q_box.stateChanged.connect(self.addl_q_setting_changed)
+
+        language_label = QLabel('Language : ')
+        lang_sel_box = QComboBox()
+        lang_sel_box.addItems(['ko', 'en', 'ja', 'zh-CN'])
+        lang_sel_box.setFocusPolicy(Qt.ClickFocus)
+        lang_sel_box.currentIndexChanged.connect(self.lang_changed)
+        lang_layout = QHBoxLayout()
+        lang_layout.addWidget(language_label)
+        lang_layout.addWidget(lang_sel_box)
+        lang_widget = QWidget()
+        lang_widget.setLayout(lang_layout)
+
         self.history_box = QScrollArea()
         self.history_box.setWidgetResizable(True)
         self.history_box.setFocusPolicy(Qt.NoFocus)
@@ -64,6 +81,8 @@ class ChatWidget(QWidget):
         self.history_box.setWidget(widget)
 
         self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().addWidget(addl_q_box)
+        self.layout().addWidget(lang_widget)
         self.layout().addWidget(self.history_box)
         self.layout().addWidget(self.question_box)
 
@@ -81,11 +100,13 @@ class ChatWidget(QWidget):
 
         self.question_box.clear()
         self.push_dialogue(question, is_answer=False)
-        self.requested.emit(question)
+        self.requested.emit(question, self.addl_q, self.language)
 
-    def push_answer(self, answer):
+    def push_answer(self, result):
         self.answered = True
-        self.push_dialogue(answer)
+        self.push_dialogue(result[0])
+        for i, addl_q in enumerate(result[1:]):
+            self.addl_q_boxes[i].setText(addl_q)
 
     def push_dialogue(self, text, is_answer=True):
         dialogue = QLabel()
@@ -111,6 +132,37 @@ class ChatWidget(QWidget):
             layout.addStretch(1)
             layout.addWidget(dialogue)
         self.history_layout.addLayout(layout)
+    
+    def addl_q_clicked(self):
+        if not self.answered:
+            return
+        
+        self.answered = False
+        question = self.sender().text()
+        if question:
+            self.push_dialogue(question, is_answer=False)
+            self.requested.emit(question, self.addl_q, self.language)
+    
+    def addl_q_setting_changed(self, state):
+        if not self.answered:
+            return
+        
+        if state == 2:
+            self.addl_q = True
+            for i in range(2, 5):
+                q_box = QPushButton()
+                q_box.setStyleSheet("text-align: left;")
+                q_box.clicked.connect(self.addl_q_clicked)
+                self.addl_q_boxes.append(q_box)
+                self.layout().insertWidget(i, q_box)
+        else:
+            self.addl_q = False
+            for q_box in self.addl_q_boxes:
+                q_box.setParent(None)
+                self.addl_q_boxes = []
+    
+    def lang_changed(self):
+        self.language = self.sender().currentText()
 
 
 def deleteItemsOfLayout(layout):

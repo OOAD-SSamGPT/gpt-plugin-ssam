@@ -18,6 +18,8 @@ class ChatbotController:
         self.file_path = file_path
         self.chat_widget = chat_widget
         self.question = ''
+        self.addl_q = False
+        self.language = 'ko'
         self.chat_history = []
 
         self.init_chatbot_thread = InitChatbotThread(self)
@@ -29,8 +31,10 @@ class ChatbotController:
         self.handle_request_thread.finished.connect(
             self.chat_widget.push_answer)
 
-    def handle_request(self, question):
+    def handle_request(self, question, addl_q, language):
         self.question = question
+        self.addl_q = addl_q
+        self.language = language
         self.handle_request_thread.start()
 
 
@@ -56,24 +60,48 @@ class InitChatbotThread(QThread):
 
 
 class HandleRequestThread(QThread):
-    finished = pyqtSignal(str)
+    finished = pyqtSignal(list)
 
     def __init__(self, chatbot_controller):
         super().__init__()
         self.controller = chatbot_controller
 
     def run(self):
+        
         self.controller.question = self.translate(
-            self.controller.question, "ko", "en")
+            self.controller.question, self.controller.language, "en")
         result = self.controller.chat_bot(
             {"question": self.controller.question, "chat_history": self.controller.chat_history})
-        result = self.translate(result['answer'], "en", "ko")
-
+        answer = self.translate(
+            result['answer'], "en", self.controller.language)
         self.controller.chat_history.append(
-            (self.controller.question, result))
+            (self.controller.question, answer))
+        result = [answer]
+
+        # added
+        if self.controller.addl_q:
+            additional_ques = self.controller.chat_bot(
+                {"question": f"recommend three additional question about \"{self.controller.question}\"",
+                "chat_history": self.controller.chat_history})
+            additional_ques = self.translate(
+                additional_ques['answer'], "en", self.controller.language)
+            self.controller.chat_history.append(
+                (self.controller.question, additional_ques))
+            print(additional_ques)
+            if ':' in additional_ques:
+                addl_ques = additional_ques.split(':')[1].strip()
+            else:
+                addl_ques = additional_ques.strip()
+            addl_ques = list(map(lambda x: x.strip() + '?', addl_ques.split('?')[:3]))
+            print(addl_ques)
+            result.extend(addl_ques)
+        
+        # result = f"proper answer with\nadditional_question : {self.controller.addl_q}\nlanguage : {self.controller.language}"
         self.finished.emit(result)
 
     def translate(self, question, src, tar) -> str:
+        if src == 'en' and tar == 'en':
+            return question
         # 개발자센터에서 발급받은 Client ID 값
         client_id = os.environ.get('PAPAGO_CLIENT')
         # 개발자센터에서 발급받은 Client Secret 값
