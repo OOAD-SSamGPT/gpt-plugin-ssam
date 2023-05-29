@@ -71,10 +71,9 @@ class HandleRequestThread(QThread):
             self.controller.question, self.controller.language, "en")
         result = self.controller.chat_bot(
             {"question": self.controller.question, "chat_history": self.controller.chat_history})
+        self.controller.chat_history.append(self.controller.question, result['answer'])
         answer = self.translate(
             result['answer'], "en", self.controller.language)
-        self.controller.chat_history.append(
-            (self.controller.question, answer))
         result = [answer]
 
         if self.controller.addl_q:
@@ -90,7 +89,6 @@ class HandleRequestThread(QThread):
             else:
                 addl_ques = additional_ques.strip()
             addl_ques = list(map(lambda x: x.strip() + '?', addl_ques.split('?')[:3]))
-            print(addl_ques)
             result.extend(addl_ques)
         self.finished.emit(result)
 

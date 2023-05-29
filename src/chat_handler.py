@@ -58,7 +58,7 @@ class ChatHandler:
             self.chat_widget.create_addl_q_boxes()
         else:
             self.addl_q = False
-            self.chat_widget.destory_addl_q_boxes()
+            self.chat_widget.destroy_addl_q_boxes()
     
     def set_language(self, language):
         self.language = language
