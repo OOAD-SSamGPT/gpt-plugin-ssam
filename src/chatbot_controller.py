@@ -46,16 +46,16 @@ class InitChatbotThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
-        # load_dotenv()
-        # os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
+        load_dotenv()
+        os.environ["OPENAI_API_KEY"] = os.environ.get('API_KEY')
 
-        # loader = PyPDFLoader(self.controller.file_path)
-        # chunks = loader.load_and_split()
-        # embeddings = OpenAIEmbeddings()
-        # db = FAISS.from_documents(chunks, embeddings)
+        loader = PyPDFLoader(self.controller.file_path)
+        chunks = loader.load_and_split()
+        embeddings = OpenAIEmbeddings()
+        db = FAISS.from_documents(chunks, embeddings)
 
-        # self.controller.chat_bot = ConversationalRetrievalChain.from_llm(
-        #     OpenAI(temperature=0.1), db.as_retriever())
+        self.controller.chat_bot = ConversationalRetrievalChain.from_llm(
+            OpenAI(temperature=0.1), db.as_retriever())
         self.finished.emit()
 
 
@@ -67,31 +67,30 @@ class HandleRequestThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
-        # self.controller.question = self.translate(
-        #     self.controller.question, self.controller.language, "en")
-        # result = self.controller.chat_bot(
-        #     {"question": self.controller.question, "chat_history": self.controller.chat_history})
-        # self.controller.chat_history.append((self.controller.question, result['answer']))
-        # answer = self.translate(
-        #     result['answer'], "en", self.controller.language)
-        # result = [answer]
+        self.controller.question = self.translate(
+            self.controller.question, self.controller.language, "en")
+        result = self.controller.chat_bot(
+            {"question": self.controller.question, "chat_history": self.controller.chat_history})
+        self.controller.chat_history.append((self.controller.question, result['answer']))
+        answer = self.translate(
+            result['answer'], "en", self.controller.language)
+        result = [answer]
 
-        # if self.controller.addl_q:
-        #     additional_ques = self.controller.chat_bot(
-        #         {"question": "recommend three additional question about your lask answer with format as 1.question, 2.question, 3.question.",
-        #         "chat_history": self.controller.chat_history})
-        #     additional_ques = self.translate(
-        #         additional_ques['answer'], "en", self.controller.language)
-        #     self.controller.chat_history.append(
-        #         (self.controller.question, additional_ques))
-        #     if ':' in additional_ques:
-        #         addl_ques = additional_ques.split(':')[1].strip()
-        #     else:
-        #         addl_ques = additional_ques.strip()
-        #     addl_ques = list(map(lambda x: x.strip() + '?', addl_ques.split('?')[:3]))
-        #     result.extend(addl_ques)
-        # self.finished.emit(result)
-        self.finished.emit(['answer'])
+        if self.controller.addl_q:
+            additional_ques = self.controller.chat_bot(
+                {"question": "recommend three additional question about your lask answer with format as 1.question, 2.question, 3.question.",
+                "chat_history": self.controller.chat_history})
+            additional_ques = self.translate(
+                additional_ques['answer'], "en", self.controller.language)
+            self.controller.chat_history.append(
+                (self.controller.question, additional_ques))
+            if ':' in additional_ques:
+                addl_ques = additional_ques.split(':')[1].strip()
+            else:
+                addl_ques = additional_ques.strip()
+            addl_ques = list(map(lambda x: x.strip() + '?', addl_ques.split('?')[:3]))
+            result.extend(addl_ques)
+        self.finished.emit(result)
 
     def translate(self, question, src, tar) -> str:
         if src == 'en' and tar == 'en':
