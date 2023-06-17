@@ -3,9 +3,10 @@ from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import Qt
 
 from chatbot_controller import ChatbotController
+from chat_handler import ChatHandler
 
 
-class EventHandler:
+class MainController:
     def __init__(self, window, widgets, actions):
         self.pdf = None
         self.idx = 0
@@ -22,6 +23,9 @@ class EventHandler:
 
         self.open_action = actions['open']
         self.save_action = actions['save']
+
+        self.chat_handler = ChatHandler(self.chat_widget)
+        self.chat_widget.set_handler(self.chat_handler)
 
         self.connect_events()
     
@@ -40,10 +44,10 @@ class EventHandler:
 
     def load_chatbot(self):
         if self.pdf:
-            self.chatbot_controler = ChatbotController(
-                self.file_path, self.chat_widget)
+            self.chatbot_controller = ChatbotController(
+                self.file_path, self.chat_handler)
             self.chat_widget.requested.connect(
-                self.chatbot_controler.handle_request)
+                self.chatbot_controller.handle_request)
     
     def idx_changed(self, idx):
         if self.pdf:
@@ -60,6 +64,9 @@ class EventHandler:
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self.window, 'Open file', '', 'PDF Files (*.pdf)')
+        if not file_path:
+            return
+        
         self.file_path = file_path
         self.pdf = fitz.open(file_path)
         self.idx = 0
@@ -70,7 +77,7 @@ class EventHandler:
         self.preview_widget.set_pdf(self.pdf)
         self.pageview_widget.set_page(self.pdf[0])
         self.note_widget.load_notes(self.pdf)
-        self.chat_widget.init_initial_ui()
+        self.chat_handler.init_initial_ui()
     
     def save_file(self):
         if self.pdf:

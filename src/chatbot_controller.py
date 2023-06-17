@@ -14,9 +14,9 @@ load_dotenv()
 
 
 class ChatbotController:
-    def __init__(self, file_path, chat_widget):
+    def __init__(self, file_path, chat_handler):
         self.file_path = file_path
-        self.chat_widget = chat_widget
+        self.chat_handler = chat_handler
         self.question = ''
         self.addl_q = False
         self.language = 'ko'
@@ -24,12 +24,12 @@ class ChatbotController:
 
         self.init_chatbot_thread = InitChatbotThread(self)
         self.init_chatbot_thread.finished.connect(
-            self.chat_widget.init_chatbot_ui)
+            self.chat_handler.init_chatbot_ui)
         self.init_chatbot_thread.start()
 
         self.handle_request_thread = HandleRequestThread(self)
         self.handle_request_thread.finished.connect(
-            self.chat_widget.push_answer)
+            self.chat_handler.push_answer)
 
     def handle_request(self, question, addl_q, language):
         self.question = question
@@ -67,36 +67,29 @@ class HandleRequestThread(QThread):
         self.controller = chatbot_controller
 
     def run(self):
-        
         self.controller.question = self.translate(
             self.controller.question, self.controller.language, "en")
         result = self.controller.chat_bot(
             {"question": self.controller.question, "chat_history": self.controller.chat_history})
+        self.controller.chat_history.append((self.controller.question, result['answer']))
         answer = self.translate(
             result['answer'], "en", self.controller.language)
-        self.controller.chat_history.append(
-            (self.controller.question, answer))
         result = [answer]
 
-        # added
         if self.controller.addl_q:
             additional_ques = self.controller.chat_bot(
-                {"question": f"recommend three additional question about \"{self.controller.question}\"",
+                {"question": "recommend three additional question about your lask answer with format as 1.question, 2.question, 3.question.",
                 "chat_history": self.controller.chat_history})
             additional_ques = self.translate(
                 additional_ques['answer'], "en", self.controller.language)
             self.controller.chat_history.append(
                 (self.controller.question, additional_ques))
-            print(additional_ques)
             if ':' in additional_ques:
                 addl_ques = additional_ques.split(':')[1].strip()
             else:
                 addl_ques = additional_ques.strip()
             addl_ques = list(map(lambda x: x.strip() + '?', addl_ques.split('?')[:3]))
-            print(addl_ques)
             result.extend(addl_ques)
-        
-        # result = f"proper answer with\nadditional_question : {self.controller.addl_q}\nlanguage : {self.controller.language}"
         self.finished.emit(result)
 
     def translate(self, question, src, tar) -> str:
