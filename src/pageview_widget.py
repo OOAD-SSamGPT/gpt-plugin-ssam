@@ -4,6 +4,15 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 
+class PageDrawer:
+    def draw(page, scale):
+        pix = page.get_pixmap(matrix=fitz.Matrix(scale, scale))
+        qimage = QImage(pix.samples_ptr, pix.width, pix.height,
+                        pix.stride, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(qimage)
+        return pixmap
+
+
 class PageviewWidget(QScrollArea):
     resized = pyqtSignal(float)
 
@@ -46,10 +55,8 @@ class PageviewWidget(QScrollArea):
         elif self.scale_policy == '너비 맞춤':
             self.scale = (self.width() - 2 * self.frameWidth() -
                           self.verticalScrollBar().width()) / self.page.rect.width
-        pix = self.page.get_pixmap(matrix=fitz.Matrix(self.scale, self.scale))
-        qimage = QImage(pix.samples_ptr, pix.width, pix.height,
-                        pix.stride, QImage.Format_RGB888)
-        pixmap = QPixmap.fromImage(qimage)
+        
+        pixmap = PageDrawer.draw(self.page, self.scale)
         self.label.setPixmap(pixmap)
 
     def resizeEvent(self, event):
