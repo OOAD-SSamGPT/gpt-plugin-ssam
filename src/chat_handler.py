@@ -41,7 +41,6 @@ class ChatHandler:
         self.chat_widget.push_dialogue(result[0])        
 
     def addl_q_requested(self, question):
-        print(question)
         if not self.answered:
             return
 

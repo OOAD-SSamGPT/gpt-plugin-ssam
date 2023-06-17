@@ -35,6 +35,17 @@ class PreviewItem(QWidget):
         self.clicked.emit(self.idx)
 
 
+class PreviewFactory:
+    def create(self, pdf, callback, layout):
+        preview_items = []
+        for i, page in enumerate(pdf):
+            preview_item = PreviewItem(i, page)
+            preview_item.clicked.connect(callback)
+            layout.addWidget(preview_item)
+            preview_items.append(preview_item)
+        return preview_items
+
+
 class PreviewWidget(QScrollArea):
     idxChanged = pyqtSignal(int)
 
@@ -60,12 +71,8 @@ class PreviewWidget(QScrollArea):
         layout.setSpacing(0)
         layout.setContentsMargins(0, 0, 0, 0)
 
-        for i, page in enumerate(pdf):
-            preview_item = PreviewItem(i, page)
-            preview_item.clicked.connect(self.preview_item_clicked)
-            layout.addWidget(preview_item)
-            self.preview_items.append(preview_item)
-
+        self.preview_items = PreviewFactory().create(pdf, self.preview_item_clicked, layout)
+        
         self.setWidget(widget)
         self.setFixedWidth(self.sizeHint().width() + 2 * self.frameWidth() +
                            self.verticalScrollBar().sizeHint().width())
